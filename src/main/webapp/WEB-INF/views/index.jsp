@@ -10,6 +10,10 @@
 <body>
 <h2>Welcome to Scrumble</h2>
 
+<form action="index">
+Enter a word<input type="text" name="entry">
+<input type="submit" value="Submit">
+</form>
 
 </body>
 </html>
