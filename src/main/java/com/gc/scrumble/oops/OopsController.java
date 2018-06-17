@@ -35,6 +35,7 @@ public class OopsController {
 		Word response = restTemplate.getForObject("https://api.wordnik.com/v4/words.json/search/" + word + 
 				"?allowRegex=false&caseSensitive=false&minCorpusCount=5&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=1&maxLength=-1&limit=10&api_key="
 				+ key, Word.class);
+		System.out.println("Look here jerks " + response);
 		mv.addObject("word", response);		
 		return mv;
 	}
