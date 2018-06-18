@@ -1,5 +1,7 @@
 package com.gc.scrumble.oops.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +24,7 @@ public class Rootword {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "scores", joinColumns = @JoinColumn(name = "wordid"), inverseJoinColumns = @JoinColumn(name = "userid"))
-	private Score score;
+	private List <Score> scores;
 
 	public Rootword() {
 	}
@@ -51,9 +53,18 @@ public class Rootword {
 	public void setWordname(String wordname) {
 		this.wordname = wordname;
 	}
+	
+	public List<Score> getScores() {
+		return scores;
+	}
+
+	public void setScores(List<Score> scores) {
+		this.scores = scores;
+	}
 
 	@Override
 	public String toString() {
-		return "Rootword [wordid=" + wordid + ", wordname=" + wordname + "]";
+		return "Rootword [wordid=" + wordid + ", wordname=" + wordname + ", scores=" + scores + "]";
 	}
+
 }

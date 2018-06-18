@@ -51,6 +51,7 @@ public class Score {
 
 	@Override
 	public String toString() {
-		return "Score [scoreid=" + scoreid + ", scoreval=" + scoreval + "]";
+		return "Score [scoreid=" + scoreid + ", scoreval=" + scoreval + ", userid=" + userid + ", wordid=" + wordid
+				+ "]";
 	}
 }
