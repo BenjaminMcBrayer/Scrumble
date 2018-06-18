@@ -17,7 +17,7 @@ import com.gc.scrumble.oops.entity.Word;
 @Controller
 public class OopsController {
 
-	@Value("${oops.apikey}")
+	//@Value("${oops.apikey}")
 	private String key;
 	
 	
@@ -27,6 +27,7 @@ public class OopsController {
 //		
 //		return "index";
 //	}
+	
 	
 	@RequestMapping("/index")
 	public ModelAndView findFactType(@RequestParam("entry")String word) {
