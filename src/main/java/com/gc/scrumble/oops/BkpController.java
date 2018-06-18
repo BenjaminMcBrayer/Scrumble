@@ -25,11 +25,6 @@ import com.gc.scrumble.oops.entity.BkpWord;
  */
 @Controller
 public class BkpController {
-	
-	@RequestMapping("/login")
-	public ModelAndView login() {
-		return new ModelAndView("/login");
-	}
 
 	@RequestMapping("/bkpindex")
 	public ModelAndView findFactType(@RequestParam("entry")String word) {
