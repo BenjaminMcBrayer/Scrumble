@@ -18,12 +18,12 @@ public class Score {
 	public Score() {
 	}
 
-	public Score(Long scoreid, Long scoreval, User user, Rootword rootword) {
+	public Score(Long scoreid, Long scoreval) {
 		this.scoreid = scoreid;
 		this.scoreval = scoreval;
 	}
 
-	public Score(Long scoreval, User user, Rootword rootword) {
+	public Score(Long scoreval) {
 		this.scoreval = scoreval;
 	}
 
