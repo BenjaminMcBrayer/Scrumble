@@ -30,7 +30,7 @@ public class OopsController {
 	
 	@RequestMapping("/index")
 	public ModelAndView findFactType(@RequestParam("entry")String word) {
-		ModelAndView mv = new ModelAndView("index");
+		ModelAndView mv = new ModelAndView("result");
 		RestTemplate restTemplate = new RestTemplate();
 		Word response = restTemplate.getForObject("https://api.wordnik.com/v4/words.json/search/" + word + 
 				"?allowRegex=false&caseSensitive=false&minCorpusCount=5&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=1&maxLength=-1&limit=10&api_key="
