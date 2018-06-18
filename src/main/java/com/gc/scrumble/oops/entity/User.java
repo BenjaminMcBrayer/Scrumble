@@ -1,11 +1,18 @@
 package com.gc.scrumble.oops.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
 
 	@Id
@@ -13,6 +20,10 @@ public class User {
 	private Long userid;
 	private String username;
 	private String pword;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "scores", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "wordid"))
+	private Score score;
 
 	public User() {
 	}
@@ -22,7 +33,7 @@ public class User {
 		this.username = username;
 		this.pword = pword;
 	}
-	
+
 	public User(String username, String pword) {
 		this.username = username;
 		this.pword = pword;
