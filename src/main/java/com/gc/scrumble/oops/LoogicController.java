@@ -25,9 +25,9 @@ public class LoogicController {
 		System.out.println("Something went wrong");
 		return new ModelAndView("/");
 	}
-	@RequestMapping("/login2")
-	public ModelAndView login2() {
-		return new ModelAndView("gameboard");
+	@RequestMapping("/login")
+	public ModelAndView login() {
+		return new ModelAndView("login");
 		
 	}
 	@RequestMapping("/gameboard")

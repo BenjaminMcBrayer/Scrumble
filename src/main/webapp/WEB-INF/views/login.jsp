@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body onload="hideNPl(); hideLogin();">
-	${dummylogin}
+	${login}
 	<h1>Get ready to SCRUMBLE!!!</h1>
 	<form action="numPlay">
 		<select id="nP" name="numPlayers" onChange="hideshowNPl()">
@@ -26,9 +26,23 @@
 		</select>
 	</form>
 	<br>
+	<form action = "addPlayer">
+	<a href="/addPlayer" id=addPlayer>Register Here</a>
+	</form>
+	<br>
 	<form id="login" action="login" method="post">
-		<!-- User Name -->
-		<label for="username">User Name</label> <input type="email"
+		Player 1<br>
+		<label for="username">User Name</label> <input type="text"
+			name="email" placeholder="User Name" required></input>
+		<!-- Password -->
+		<label for="pword">Password</label> <input type="password"
+			name="pword" placeholder="Password" required></input> <input
+			type="submit" value="Login"></input>
+	</form>
+	<br>
+	<form id="login2" action="login" method="post">
+		Player 2<br>
+		<label for="username">User Name</label> <input type="text"
 			name="email" placeholder="User Name" required></input>
 		<!-- Password -->
 		<label for="pword">Password</label> <input type="password"
@@ -55,18 +69,47 @@
 		function hideshowLogin() {
 			var s3 = document.getElementById("nPl");
 			var s4 = document.getElementById("login");
+			var s5 = document.getElementById("nPl");
+			var s6 = document.getElementById("login2");
+			var s7 = document.getElementById("nP");
+			var s8 = document.getElementById("addPlayer")
 			if (s3.options[s3.selectedIndex].text == "Yes") {
 				s4.style.visibility = "visible";
+				s8.style.visibility = "hidden";
 				document.getElementById("login").style.visibility = "hidden";
+				document.getElementById("login2").style.visibility = "hidden";
+				document.getElementById("addPlayer").style.visibility = "visible";
 			}
 			if (s3.options[s3.selectedIndex].text == "No") {
 				s4.style.visibility = "hidden";
+				s6.style.visibility = "hidden";
+				s8.style.visibility = "hidden";
 				document.getElementById("login").style.visibility = "visible";
+				document.getElementById("addPlayer").style.visibility = "hidden";
 			}
+			if(s7.options[s7.selectedIndex].text == 2){
+				if (s5.options[s5.selectedIndex].text == "Yes") {
+					s8.style.visibility = "hidden";
+					document.getElementById("login2").style.visibility = "hidden";
+					document.getElementById("addPlayer").style.visibility = "hidden ";
+					document.getElementById("addPlayer").style.visibility = "visible";
+				}
+				if (s5.options[s5.selectedIndex].text == "No") {
+					s6.style.visibility = "hidden";
+					s8.style.visibility = "hidden";
+					document.getElementById("login2").style.visibility = "visible";
+					document.getElementById("addPlayer").style.visibility = "hidden";
+			} }
+		 
 		}
+		
+
 		function hideLogin() {
 			document.getElementById("login").style.visibility = "hidden";
+			document.getElementById("login2").style.visibility = "hidden";
+			document.getElementById("addPlayer").style.visibility = "hidden";
 		}
+		
 	</script>
 </body>
 </html>
