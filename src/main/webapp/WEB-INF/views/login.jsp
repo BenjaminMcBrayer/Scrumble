@@ -27,10 +27,10 @@
 	</form>
 	<br>
 	<form action = "addPlayer">
-	<a href="/addPlayer" id=addPlayer>Register Here</a>
+	<a href="/addPlayer" id=addPlayer>Register Player</a>
 	</form>
 	<form action = "addPlayer2">
-	<a href="/addPlayer2" id=addPlayer2>Register Here</a>
+	<a href="/addPlayer2" id=addPlayer2>Register Player(s)</a>
 	</form>
 	<br>
 	<form id="login" action="login" method="post">
