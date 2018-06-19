@@ -24,13 +24,12 @@ public class Score {
 	public Score() {
 	}
 
-	public Score(Long scoreid, Long scoreval) {
+	public Score(Long scoreid, Long scoreval, Long userid, Long wordid) {
+		super();
 		this.scoreid = scoreid;
 		this.scoreval = scoreval;
-	}
-
-	public Score(Long scoreval) {
-		this.scoreval = scoreval;
+		this.userid = userid;
+		this.wordid = wordid;
 	}
 
 	public Long getScoreid() {
@@ -49,9 +48,26 @@ public class Score {
 		this.scoreval = scoreval;
 	}
 
+	public Long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Long userid) {
+		this.userid = userid;
+	}
+
+	public Long getWordid() {
+		return wordid;
+	}
+
+	public void setWordid(Long wordid) {
+		this.wordid = wordid;
+	}
+
 	@Override
 	public String toString() {
-		return "Score [scoreid=" + scoreid + ", scoreval=" + scoreval + ", userid=" + userid + ", wordid=" + wordid
-				+ "]";
+		return "Score scoreid: " + scoreid + ", scoreval: " + scoreval + ", userid: " + userid + ", wordid: " + wordid;
 	}
+
+
 }

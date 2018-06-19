@@ -17,11 +17,9 @@ import com.gc.scrumble.oops.entity.Word;
 @Controller
 public class OopsController {
 
-	//@Value("${oops.apikey}")
+	@Value("${oops.apikey}")
 	private String key;
-	
-	
-	
+		
 //	@RequestMapping("/")
 //	public String index() {
 //		
@@ -32,12 +30,16 @@ public class OopsController {
 	@RequestMapping("/index")
 	public ModelAndView findFactType(@RequestParam("entry")String word) {
 		ModelAndView mv = new ModelAndView("result");
-		RestTemplate restTemplate = new RestTemplate();
-		Word response = restTemplate.getForObject("https://api.wordnik.com/v4/words.json/search/" + word + 
-				"?allowRegex=false&caseSensitive=false&minCorpusCount=5&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=1&maxLength=-1&limit=10&api_key="
-				+ key, Word.class);
-		System.out.println("Look here jerks " + response);
-		mv.addObject("word", response);		
+		
+		 WordnikAPI nik = new WordnikAPI();
+		 System.out.println(nik.wordnikValidWord(word, key));
+		 
+//		RestTemplate restTemplate = new RestTemplate();
+//		Word response = restTemplate.getForObject("https://api.wordnik.com/v4/words.json/search/" + word + 
+//				"?allowRegex=false&caseSensitive=false&minCorpusCount=5&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=1&maxLength=-1&limit=10&api_key="
+//				+ key, Word.class);
+//		System.out.println("Look here jerks " + response);
+//		mv.addObject("word", response);		
 		return mv;
 	}
 
