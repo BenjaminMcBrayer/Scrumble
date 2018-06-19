@@ -29,6 +29,9 @@
 	<form action = "addPlayer">
 	<a href="/addPlayer" id=addPlayer>Register Here</a>
 	</form>
+	<form action = "addPlayer2">
+	<a href="/addPlayer2" id=addPlayer2>Register Here</a>
+	</form>
 	<br>
 	<form id="login" action="login" method="post">
 		Player 1<br>
@@ -72,7 +75,8 @@
 			var s5 = document.getElementById("nPl");
 			var s6 = document.getElementById("login2");
 			var s7 = document.getElementById("nP");
-			var s8 = document.getElementById("addPlayer")
+			var s8 = document.getElementById("addPlayer");
+			var s8 = document.getElementById("addPlayer2");
 			if (s3.options[s3.selectedIndex].text == "Yes") {
 				s4.style.visibility = "visible";
 				s8.style.visibility = "hidden";
@@ -92,13 +96,13 @@
 					s8.style.visibility = "hidden";
 					document.getElementById("login2").style.visibility = "hidden";
 					document.getElementById("addPlayer").style.visibility = "hidden ";
-					document.getElementById("addPlayer").style.visibility = "visible";
+					document.getElementById("addPlayer2").style.visibility = "visible";
 				}
 				if (s5.options[s5.selectedIndex].text == "No") {
 					s6.style.visibility = "hidden";
 					s8.style.visibility = "hidden";
 					document.getElementById("login2").style.visibility = "visible";
-					document.getElementById("addPlayer").style.visibility = "hidden";
+					document.getElementById("addPlayer2").style.visibility = "hidden";
 			} }
 		 
 		}
@@ -108,6 +112,7 @@
 			document.getElementById("login").style.visibility = "hidden";
 			document.getElementById("login2").style.visibility = "hidden";
 			document.getElementById("addPlayer").style.visibility = "hidden";
+			document.getElementById("addPlayer2").style.visibility = "hidden";
 		}
 		
 	</script>
