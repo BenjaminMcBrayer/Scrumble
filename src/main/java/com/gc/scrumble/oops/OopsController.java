@@ -1,5 +1,8 @@
 package com.gc.scrumble.oops;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Value;
 /*
  * Grand Circus Java Coding Bootcamp
@@ -22,8 +25,20 @@ public class OopsController {
 	public ModelAndView findFactType(@RequestParam("entry") String word) {
 
 		String rootword = "rootword";
-		String[] wordlist = new String[] { "root", "deer" };
+		String[] wordarray = new String[] { "root", "deer", "deer", "root" };
 
+		// convert array to hash set
+		Set<String> wordset = new HashSet<>();
+		for (String w : wordarray) {
+			if (wordset.add(w) == false) {
+				System.out.println("found duplicate: " + w);
+			}
+		}
+		// convert hash set to a new array
+		String[] wordlist = new String[wordset.size()];
+		wordlist = wordset.toArray(wordlist);
+		System.out.println(wordlist);
+		
 		int score = 0;
 		boolean validEntry = true;
 		String temproot = rootword;
