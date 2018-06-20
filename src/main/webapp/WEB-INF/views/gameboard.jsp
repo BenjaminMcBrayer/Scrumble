@@ -10,6 +10,8 @@
 <body>
 <h1>Lets Get Ready To Scrumble!!!</h1>
 
+<p>Time left: <span id="count">30</span> seconds...</p>
+
 <h3>The rootword is: </h3>${rootword }
 <br>
 <br>
@@ -38,6 +40,30 @@ function clearAndShow () {
 	  
 	  messageBox.innerHTML += "Entry Words: " + entry.join(", ") + "<br/>";
 }
+
+window.onload = function(){
+
+	(function(){
+	  var counter = 30;
+
+	  setInterval(function() {
+	    counter--;
+	    if (counter >= 0) {
+	      span = document.getElementById("count");
+	      span.innerHTML = counter;
+	    }
+	    // Display 'counter' wherever you want to display it.
+	    if (counter === -1) {
+	        alert('this is where it happens');
+	        clearInterval(counter);
+	    }
+
+	  }, 1000);
+
+	})();
+
+	}
+
 
 
         </script>
