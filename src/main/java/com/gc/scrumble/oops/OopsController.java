@@ -18,14 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class OopsController {
 
-	@Value("${oops.apikey}")
+	//@Value("${oops.apikey}")
 	private String key;
 
+	@RequestMapping("/gameboard")
+	public ModelAndView game() {
+		return new ModelAndView("gameboard");
+	}
 	@RequestMapping("/index")
 	public ModelAndView findFactType(@RequestParam("entry") String word) {
 
 		String rootword = "rootword";
-		String[] wordarray = new String[] { "root", "deer", "deer", "root" };
+		String[] word = new String[];
 
 		// convert array to hash set
 		Set<String> wordset = new HashSet<>();
