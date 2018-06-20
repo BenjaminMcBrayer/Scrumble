@@ -12,7 +12,7 @@
 
 <p>Time left: <span id="count">30</span> seconds...</p>
 
-<h3>The rootword is: </h3>${rootword }
+<h3>The rootword is: </h3>${rootword.wordname }
 <br>
 <br>
 
@@ -41,6 +41,7 @@ function clearAndShow () {
 	  messageBox.innerHTML += "Entry Words: " + entry.join(", ") + "<br/>";
 }
 
+setTimeout("location.href = '/result';",30000);
 window.onload = function(){
 
 	(function(){

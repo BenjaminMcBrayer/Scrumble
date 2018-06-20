@@ -29,7 +29,7 @@ public class OopsController {
 	public ModelAndView findFactType(@RequestParam("entry") String word) {
 
 		String rootword = "rootword";
-		String[] wordarray = new String[] { "root", "deer", "deer", "root" };
+		String[] word = new String[];
 
 		// convert array to hash set
 		Set<String> wordset = new HashSet<>();
