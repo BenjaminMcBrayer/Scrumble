@@ -1,5 +1,7 @@
 package com.gc.scrumble.oops;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -12,15 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gc.scrumble.oops.entity.Rootword;
 import com.gc.scrumble.oops.entity.User;
+import com.gc.scrumble.oops.repo.RootwordsRepository;
 import com.gc.scrumble.oops.repo.UsersRepository;
 
 @Controller
-@SessionAttributes({ "numPlayers", "newusername1", "newusername2", "username1", "username2" })
+@SessionAttributes({ "numPlayers", "newusername1", "newusername2", "username1", "username2", "rootword" })
 public class LogicController {
 
 	@Autowired
 	UsersRepository uP;
+	
+	@Autowired
+	RootwordsRepository rP;
 
 	@RequestMapping("/dummylogin")
 	public String login() {
@@ -71,4 +78,16 @@ public class LogicController {
 				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
 	}
 
+	// This method starts immediately upon pressing Play button.
+	@RequestMapping("/play")
+	public ModelAndView play(HttpSession session, Model model) {
+		List<Rootword> rootwordList = new ArrayList<>();
+		rootwordList = rP.findAll();
+		long listLength = rootwordList.size();
+		int randomIndex = (int)(Math.random()*listLength);
+		Rootword rootword = rootwordList.get(randomIndex);
+		ModelAndView mv = new ModelAndView("gameboard", "rootword", rootword);
+		model.addAttribute("rootword", rootword);
+		return mv;
+	}
 }
