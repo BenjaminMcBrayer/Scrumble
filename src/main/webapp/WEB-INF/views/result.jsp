@@ -11,6 +11,6 @@
 <h2>Welcome to Srumble</h2>
 <h3>Main Controller & WordNik Result Page</h3>
 
-${word }
+${score }
 </body>
 </html>

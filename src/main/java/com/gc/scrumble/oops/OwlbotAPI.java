@@ -25,32 +25,36 @@ import com.gc.scrumble.oops.entity.BkpWord;
  */
 
 public class OwlbotAPI {
-//	private boolean isValid = false;
+
+//	Main method
+//	added here for testing
+//
 //	public static void main(String[] args) {
 //		OwlbotAPI owl = new OwlbotAPI();
 //		System.out.println(owl.owlbotValidWord("chicken"));
 //	}
 
 	public boolean owlbotValidWord(String word) {
-		
+
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE); 
-		
+		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+
 		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-		
+
 		CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier())
 				.build();
 		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 		requestFactory.setHttpClient(httpClient);
 		// need to pass in the request factory to the RestTemplate
 		RestTemplate restTemplate = new RestTemplate(requestFactory);
-				
+
 		ResponseEntity<BkpWord[]> response = restTemplate.exchange(
-				"https://owlbot.info/api/v2/dictionary/" + word + "?format=json",
-				HttpMethod.GET, entity, BkpWord[].class);
-		
+				"https://owlbot.info/api/v2/dictionary/" + word + "?format=json", HttpMethod.GET, entity,
+				BkpWord[].class);
+
 		if (response.getBody().length != 0) {
 			return true;
-		} else return false;
+		} else
+			return false;
 	}
 }
