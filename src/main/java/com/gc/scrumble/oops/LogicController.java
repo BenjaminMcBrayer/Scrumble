@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gc.scrumble.oops.entity.User;
-import com.gc.scrumble.oops.repository.DummyUsersRepository;
+import com.gc.scrumble.oops.repo.UsersRepository;
 
 @Controller
 @SessionAttributes({ "numPlayers", "newusername1", "newusername2", "username1", "username2" })
 public class LogicController {
 
 	@Autowired
-	DummyUsersRepository duP;
+	UsersRepository uP;
 
 	@RequestMapping("/dummylogin")
 	public String login() {
@@ -31,7 +31,7 @@ public class LogicController {
 	public ModelAndView addPlayerOne(@RequestParam("newusername1") String username,
 			@RequestParam("newpword1") String pword, HttpSession session, Model model) {
 		User user = new User(username, pword);
-		duP.save(user);
+		uP.save(user);
 		model.addAttribute("newusername1", username);
 		return new ModelAndView("redirect:/dummylogin", "thankyou1", "Thank you, " + username + ".");
 	}
@@ -40,7 +40,7 @@ public class LogicController {
 	public ModelAndView addPlayerTwo(@RequestParam("newusername2") String username,
 			@RequestParam("newpword2") String pword, HttpSession session, Model model) {
 		User user = new User(username, pword);
-		duP.save(user);
+		uP.save(user);
 		model.addAttribute("newusername2", username);
 		return new ModelAndView("redirect:/dummylogin", "thankyou2", "Thank you, " + username + ".");
 	}
@@ -48,7 +48,7 @@ public class LogicController {
 	@RequestMapping("login1")
 	public ModelAndView addUser(@RequestParam("username1") String username, @RequestParam("pword1") String pword,
 			HttpSession session, Model model) {
-		Optional<User> user = duP.findByUsername(username);
+		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
 			ModelAndView mv = new ModelAndView("dummyindex", "welcome1", "Thank you, " + username);
 			model.addAttribute("username1", username);
@@ -61,7 +61,7 @@ public class LogicController {
 	@RequestMapping("/login2")
 	public ModelAndView login(@RequestParam("username2") String username, @RequestParam("pword2") String pword,
 			HttpSession session, Model model) {
-		Optional<User> user = duP.findByUsername(username);
+		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
 			ModelAndView mv = new ModelAndView("dummyindex", "welcome2", "Thank you, " + username);
 			model.addAttribute("username2", username);
