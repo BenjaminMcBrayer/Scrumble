@@ -5,13 +5,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<style>
+h1 {text-align: center;}
+h2 {text-align: center;}
+h3{text-align: center;}
+h4{text-align: right;}
+p {text-decoration: underline overline;text-align: right;}
+div{text-align: center;}
+</style>
 <title>Game Board</title>
 </head>
 <body>
 	<h1>Lets Get Ready To Scrumble!!!</h1>
-	<p>
-		Time left: <span id="count">30</span> seconds...
-	</p>
+	<p>Time left: <span id="count">30</span> seconds...</p>
 	<h1>${rootword.wordname }</h1>
 	<br>
 	<br>
@@ -21,14 +27,18 @@
 	<br>
 	<div id="score"></div>
 	<br>
+	<h3>
 	<form action="result" method="post" onsubmit="crazy();"></form>
 	<form>
-		<input id="entry" type="text" placeholder="Word" /> <input
-			type="button" value="Save/Show" onclick="insert()" />
+		<input id="entry" type="text" placeholder="Word" /> 
+		<input type="button" value="Save/Show" onclick="insert()" />
 	</form>
+	</h3>
+	<h4>
 	<form method="get" action="/addscore">
-	<button type="submit">Scores</button>
+		<button type="submit">Scores</button>
 	</form>
+	</h4>
 </body>
 <script type="text/javascript">
 	var entry = [];
@@ -46,17 +56,11 @@
 
 		messageBox.innerHTML += entry.join(", ") + "<br/>";
 	}
-
-	//setTimeout("location.href = '/index';",30000);
 	setTimeout(crazy, 30000);
 	function crazy() {
-		console.log("Crazy");
-		console.log(JSON.stringify(entry));
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				//document.getElementById("demo").innerHTML =
-				console.log(this.responseText);
 				score.innerHTML = "The score is: " + this.responseText;
 			}
 		};
@@ -64,13 +68,11 @@
 		xhttp.setRequestHeader('Content-type',
 				'application/x-www-form-urlencoded');
 		xhttp.send("entry=" + entry);
-		//xhttp.send(entry);
 		return true;
 	}
 	window.onload = function() {
 		(function() {
 			var counter = 30;
-
 			setInterval(function() {
 				counter--;
 				if (counter >= 0) {
@@ -82,9 +84,8 @@
 					clearInterval(counter);
 				}
 			}, 1000);
-
 		})();
-
 	}
 </script>
+
 </html>
