@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -31,7 +31,8 @@ public class OopsController {
 	
 	@PostMapping("/index")
 	//@RequestMapping(value = "/index", method = RequestMethod.POST)
-	public ModelAndView findFactType(@RequestParam(name="entry", required = false) String [] wordarray) {
+	@ResponseBody
+	public String findFactType(@RequestParam(name="entry", required = false) String [] wordarray) {
 		
 		
 System.out.println("wordarray:" + Arrays.toString(wordarray));
@@ -43,11 +44,12 @@ System.out.println("wordarray:" + Arrays.toString(wordarray));
 			if (wordset.add(w) == false) {
 				System.out.println("found duplicate: " + w);
 			}
+			System.out.println(wordset.toString());
 		}
 		// convert hash set to a new array
 		String[] wordlist = new String[wordset.size()];
 		wordlist = wordset.toArray(wordlist);
-		System.out.println(wordlist);
+		System.out.println(Arrays.toString(wordlist));
 		
 		int score = 0;
 		boolean validEntry = true;
@@ -106,7 +108,8 @@ System.out.println("wordarray:" + Arrays.toString(wordarray));
 			}
 		}
 
-		return new ModelAndView("result", "score", score);
+		return String.valueOf(score);
+		//return new ModelAndView("result", "score", score);
 
 	}
 

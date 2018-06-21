@@ -20,6 +20,9 @@
 <br>
 <div id="display"></div>
 <br>
+<div id="score"></div>
+<br>
+
 <form action="result" method="post" onsubmit="crazy();">
 
 <input type="submit">
@@ -33,6 +36,7 @@
 var entry  = [];
 var entryInput  = document.getElementById("entry");
 var messageBox  = document.getElementById("display");
+var score  = document.getElementById("score");
 function insert ( ) {
 	entry.push( entryInput.value );
 	clearAndShow();
@@ -42,10 +46,11 @@ function clearAndShow () {
 	  entryInput.value = "";
 	  messageBox.innerHTML = "";
 	  
-	  messageBox.innerHTML += "Entry Words: " + entry.join(", ") + "<br/>";
+	  messageBox.innerHTML += entry.join(", ") + "<br/>";
 }
 
-setTimeout("location.href = '/index';",30040);
+
+//setTimeout("location.href = '/index';",30000);
 setTimeout(crazy,30000);
 function crazy(){
 	console.log("Crazy");
@@ -55,6 +60,7 @@ function crazy(){
 	    if (this.readyState == 4 && this.status == 200) {
 	      //document.getElementById("demo").innerHTML =
 	      console.log(this.responseText);
+	      score.innerHTML = "The score is: " + this.responseText;
 	    }
 	  };
 	  xhttp.open("POST", "/index", true);
@@ -77,7 +83,6 @@ window.onload = function(){
 	    }
 	    // Display 'counter' wherever you want to display it.
 	    if (counter === -1) {
-	        alert('this is where it happens');
 	        clearInterval(counter);
 	    }
 
