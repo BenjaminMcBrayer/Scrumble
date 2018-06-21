@@ -9,14 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gc.scrumble.oops.entity.Rootword;
-import com.gc.scrumble.oops.entity.Score;
 import com.gc.scrumble.oops.entity.User;
 import com.gc.scrumble.oops.repo.RootwordsRepository;
 import com.gc.scrumble.oops.repo.ScoreRepo;
@@ -165,22 +163,22 @@ public class LogicController {
 //		return "dummyscores2";
 //	}
 	
-	@RequestMapping("addscore")
-	public ModelAndView addScore(@ModelAttribute("username1") String username, @ModelAttribute("rootword") Rootword rootword, @RequestParam("score") Long scoreval, HttpSession session, Model model) {
-		model.addAttribute("username1", username);
-		User user = new User();
-		user.setUsername(username);
-		model.addAttribute("rootword", rootword);
-		Rootword workroot = new Rootword();
-		workroot = rootword;
-		long wordid = workroot.getWordid();
-		long userid = user.getUserid();
-		model.addAttribute("score", scoreval);
-		Score scores = new Score();
-		scores.setUserid(userid);
-		scores.setWordid(wordid);
-		scores.setScoreval(scoreval);
-		sP.save(scores);
-		return new ModelAndView("result", "score", username + ": " + scoreval);
-		}
+//	@RequestMapping("addscore")
+//	public ModelAndView addScore(@ModelAttribute("username1") String username, @ModelAttribute("rootword") Rootword rootword, @RequestParam("score") Long scoreval, HttpSession session, Model model) {
+//		model.addAttribute("username1", username);
+//		User user = new User();
+//		user.setUsername(username);
+//		model.addAttribute("rootword", rootword);
+//		Rootword workroot = new Rootword();
+//		workroot = rootword;
+//		long wordid = workroot.getWordid();
+//		long userid = user.getUserid();
+//		model.addAttribute("score", scoreval);
+//		Score scores = new Score();
+//		scores.setUserid(userid);
+//		scores.setWordid(wordid);
+//		scores.setScoreval(scoreval);
+//		sP.save(scores);
+//		return new ModelAndView("result", "score", username + ": " + scoreval);
+//		}
 }
