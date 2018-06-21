@@ -1,5 +1,6 @@
 package com.gc.scrumble.oops;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,26 +12,31 @@ import org.springframework.beans.factory.annotation.Value;
  * April 2018 Cohort
  */
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class OopsController {
 
-	//@Value("${oops.apikey}")
+	@Value("${oops.apikey}")
 	private String key;
 
 	@RequestMapping("/gameboard")
 	public ModelAndView game() {
 		return new ModelAndView("gameboard");
 	}
-	@RequestMapping("/index")
-	public ModelAndView findFactType(@RequestParam("entry") String word) {
+	
+	@PostMapping("/index")
+	//@RequestMapping(value = "/index", method = RequestMethod.POST)
+	public ModelAndView findFactType(@RequestParam(name="entry", required = false) String [] wordarray) {
+		
+		
+System.out.println("wordarray:" + Arrays.toString(wordarray));
 
 		String rootword = "rootword";
-		String[] word = new String[];
-
 		// convert array to hash set
 		Set<String> wordset = new HashSet<>();
 		for (String w : wordarray) {
