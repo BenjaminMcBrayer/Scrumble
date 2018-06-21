@@ -1,6 +1,5 @@
 package com.gc.scrumble.oops;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,7 +36,7 @@ public class OopsController {
 	
 	@PostMapping("/index")
 	@ResponseBody
-	public String checkEntries(@RequestParam(name="entry", required = false) String [] wordarray, @ModelAttribute("rootword") Rootword rootword, Model model) {
+	public String checkEntries(@RequestParam(name="entry", required = false) String [] wordarray, @ModelAttribute("rootword") Rootword gameWord, Model model) {
 		
 		// convert array to hash set to eliminate duplicate words
 		Set<String> wordset = new HashSet<>();
@@ -52,9 +51,9 @@ public class OopsController {
 		
 		int score = 0;
 		boolean validEntry = true;
-		model.addAttribute("rootword" , rootword);
+		model.addAttribute("rootword" , gameWord);
 		Rootword workroot = new Rootword();
-		workroot = rootword;
+		workroot = gameWord;
 		String temproot = workroot.getWordname();
 		
 		// cycling through list of entered words
