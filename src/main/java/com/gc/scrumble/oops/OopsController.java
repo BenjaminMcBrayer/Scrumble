@@ -1,8 +1,10 @@
 package com.gc.scrumble.oops;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 /*
  * Grand Circus Java Coding Bootcamp
@@ -21,13 +23,23 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gc.scrumble.oops.entity.Rootword;
+import com.gc.scrumble.oops.entity.Score;
+import com.gc.scrumble.oops.entity.User;
+import com.gc.scrumble.oops.repo.ScoreRepo;
+import com.gc.scrumble.oops.repo.UsersRepository;
 
 @Controller
-@SessionAttributes("rootword")
+@SessionAttributes({"rootword", "username1"})
 public class OopsController {
 
 	@Value("${oops.apikey}")
 	private String key;
+	
+	@Autowired
+	ScoreRepo sR;
+	
+	@Autowired
+	UsersRepository uP;
 
 	@RequestMapping("/gameboard")
 	public ModelAndView game() {
@@ -36,7 +48,8 @@ public class OopsController {
 	
 	@PostMapping("/index")
 	@ResponseBody
-	public String checkEntries(@RequestParam(name="entry", required = false) String [] wordarray, @ModelAttribute("rootword") Rootword gameWord, Model model) {
+	public ModelAndView checkEntries(@RequestParam(name="entry", required = false) String [] wordarray, 
+			@ModelAttribute("rootword") Rootword gameWord, @ModelAttribute("username1") String player, Model model) {
 		
 		// convert array to hash set to eliminate duplicate words
 		Set<String> wordset = new HashSet<>();
@@ -49,9 +62,9 @@ public class OopsController {
 		String[] wordlist = new String[wordset.size()];
 		wordlist = wordset.toArray(wordlist);
 		
-		int score = 0;
+		long score = 0;
 		boolean validEntry = true;
-		model.addAttribute("rootword" , gameWord);
+		model.addAttribute("rootword", gameWord);
 		Rootword workroot = new Rootword();
 		workroot = gameWord;
 		String temproot = workroot.getWordname();
@@ -101,9 +114,17 @@ public class OopsController {
 				}
 			}
 		}
-
-		return String.valueOf(score);
-		//return new ModelAndView("result", "score", score);
+		model.addAttribute("username1", player);
+		Optional<User> user = uP.findByUsername(player);
+		long userid = user.get().getUserid();
+				
+		Long gameWordId = workroot.getWordid();
+		Score gameScore = new Score(score, userid, gameWordId);
+		System.out.println("Player= " + player);
+		System.out.println("GameScore= " + gameScore);
+		sR.save(gameScore);
+		
+		return new ModelAndView("result", "score", score);
 
 	}
 
