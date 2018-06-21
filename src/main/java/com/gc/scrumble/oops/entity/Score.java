@@ -25,8 +25,13 @@ public class Score {
 	}
 
 	public Score(Long scoreid, Long scoreval, Long userid, Long wordid) {
-		super();
 		this.scoreid = scoreid;
+		this.scoreval = scoreval;
+		this.userid = userid;
+		this.wordid = wordid;
+	}
+	
+	public Score(Long scoreval, Long userid, Long wordid) {
 		this.scoreval = scoreval;
 		this.userid = userid;
 		this.wordid = wordid;
