@@ -49,7 +49,7 @@ public class LogicController {
 			return mv;
 		} else {
 			uP.save(newuser);
-			model.addAttribute("user", user);
+			model.addAttribute("newusername1", username);
 			String message = "Thank you, " + username + ".";
 			return new ModelAndView("secondlogin", "thankyou1", message);
 		}
@@ -78,7 +78,7 @@ public class LogicController {
 		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
 			ModelAndView mv = new ModelAndView("oneplayerlogin", "welcome1", "Welcome to Scrumble, " + username + "!");
-			model.addAttribute("user", user);
+			model.addAttribute("username1", username);
 			return mv;
 		}
 		return new ModelAndView("oneplayerlogin", "failure1",
@@ -91,7 +91,7 @@ public class LogicController {
 		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
 			ModelAndView mv = new ModelAndView("secondlogin", "secondwelcome1", "Welcome to Scrumble, " + username + "!");
-			model.addAttribute("user", user);
+			model.addAttribute("username1", username);
 			return mv;
 		}
 		return new ModelAndView("secondlogin", "secondfailure1",

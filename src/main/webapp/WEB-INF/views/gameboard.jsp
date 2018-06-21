@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
 <style>
 h1 {text-align: center;}
 h2 {text-align: center;}
@@ -13,8 +15,6 @@ h4{text-align: right;}
 p {text-decoration: underline overline;text-align: right;}
 div{text-align: center;}
 </style>
-<title>Game Board</title>
-</head>
 <body>
 	<h1>Lets Get Ready To Scrumble!!!</h1>
 	<p>Time left: <span id="count">30</span> seconds...</p>
@@ -35,7 +35,7 @@ div{text-align: center;}
 	</form>
 	</h3>
 	<h4>
-	<form method="get" action="/addscore">
+	<form method="get" action="/index">
 		<button type="submit">Scores</button>
 	</form>
 	</h4>
@@ -53,7 +53,6 @@ div{text-align: center;}
 		// Clear our fields
 		entryInput.value = "";
 		messageBox.innerHTML = "";
-
 		messageBox.innerHTML += entry.join(", ") + "<br/>";
 	}
 	setTimeout(crazy, 30000);
