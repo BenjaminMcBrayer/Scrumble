@@ -1,5 +1,6 @@
 package com.gc.scrumble.oops;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,12 +31,10 @@ public class OopsController {
 	
 	@PostMapping("/index")
 	//@RequestMapping(value = "/index", method = RequestMethod.POST)
-	public ModelAndView findFactType(@RequestParam(name="entry", required = false) String wordarraytest) {
+	public ModelAndView findFactType(@RequestParam(name="entry", required = false) String [] wordarray) {
 		
 		
-System.out.println("wordarray:" + wordarraytest);
-
-String[] wordarray = new String[3];
+System.out.println("wordarray:" + Arrays.toString(wordarray));
 
 		String rootword = "rootword";
 		// convert array to hash set

@@ -20,7 +20,7 @@
 <br>
 <div id="display"></div>
 <br>
-<form action="" method="post" onsubmit="crazy();">
+<form action="result" method="post" onsubmit="crazy();">
 
 <input type="submit">
 </form>
@@ -45,10 +45,11 @@ function clearAndShow () {
 	  messageBox.innerHTML += "Entry Words: " + entry.join(", ") + "<br/>";
 }
 
-//setTimeout("location.href = '/index';",30000);
+setTimeout("location.href = '/index';",30040);
 setTimeout(crazy,30000);
 function crazy(){
 	console.log("Crazy");
+	console.log(JSON.stringify(entry));
 	var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
@@ -56,9 +57,9 @@ function crazy(){
 	      console.log(this.responseText);
 	    }
 	  };
-	  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	  xhttp.open("POST", "/index", true);
-	  xhttp.send("entry=" + JSON.stringify(entry));
+	  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	  xhttp.send("entry=" + entry);
 	  //xhttp.send(entry);
 	  return true;
 }
