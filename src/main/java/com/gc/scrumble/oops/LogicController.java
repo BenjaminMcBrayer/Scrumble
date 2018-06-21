@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gc.scrumble.oops.entity.Rootword;
+import com.gc.scrumble.oops.entity.Score;
 import com.gc.scrumble.oops.entity.User;
 import com.gc.scrumble.oops.repo.RootwordsRepository;
+import com.gc.scrumble.oops.repo.ScoreRepo;
 import com.gc.scrumble.oops.repo.UsersRepository;
 
 @Controller
@@ -28,6 +30,9 @@ public class LogicController {
 
 	@Autowired
 	RootwordsRepository rP;
+	
+	@Autowired
+	ScoreRepo sP;
 
 	@RequestMapping("/oneplayerlogin")
 	public String login() {
@@ -131,4 +136,47 @@ public class LogicController {
 		model.addAttribute("rootword", rootword);
 		return mv;
 	}
+	
+	@RequestMapping("dummyscores")
+	public String dummyscores() {
+		return "dummyscores";
+	}
+	
+	@RequestMapping("addscore")
+	public ModelAndView addScore(@RequestParam("username1") String username, @RequestParam("wordname") String wordname, @RequestParam("scoreval") Long scoreval, HttpSession session, Model model) {
+		session.setAttribute("username1", username);
+		session.setAttribute("wordname", wordname);
+		Optional<User> user = uP.findByUsername(username);
+		Optional<Rootword> rootword = rP.findByWordname(wordname);
+		if (user.isPresent()) {
+			long userid = user.get().getUserid();
+			long wordid = rootword.get().getWordid();
+			Score score = new Score(scoreval, userid, wordid);
+			sP.save(score);
+			model.addAttribute("scoreval", scoreval);
+			return new ModelAndView("dummyscores2", "scores", score);
+		}
+		return new ModelAndView("redirect:/dummyscores", "failure", "User is not present. Score cannot be saved.");
+	}
+	
+	@RequestMapping("dummyscores2")
+	public String dummyscores2() {
+		return "dummyscores2";
+	}
+	
+//	@RequestMapping("addscore2")
+//	public ModelAndView addScore(@RequestParam("scoreval") Long scoreval, HttpSession session, Model model) {
+//		User user = new User();
+//		Rootword rootword = new Rootword();
+//		session.setAttribute("username1", username);
+//		session.setAttribute("wordname", wordname);
+//		if (user.isPresent()) {
+//			long userid = user.get().getUserid();
+//			long wordid = rootword.get().getWordid();
+//			Score score = new Score(scoreval, userid, wordid);
+//			sP.save(score);
+//			return new ModelAndView("redirect:/dummyscores2", "scores2", score);
+//		}
+//		return new ModelAndView("redirect:/dummyscores2", "failure2", "User is not present. Score cannot be saved.");
+//	}
 }
