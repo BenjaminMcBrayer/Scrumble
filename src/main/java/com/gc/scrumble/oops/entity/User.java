@@ -40,6 +40,12 @@ public class User {
 		this.username = username;
 		this.pword = pword;
 	}
+	
+	public User(User user) {
+		this.userid = user.getUserid();
+		this.username = user.getUsername();
+		this.pword = user.getPword();
+	}
 
 	public Long getUserid() {
 		return userid;
