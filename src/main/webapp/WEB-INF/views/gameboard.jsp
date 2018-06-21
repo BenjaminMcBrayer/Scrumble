@@ -20,6 +20,10 @@
 <br>
 <div id="display"></div>
 <br>
+<form action="" method="post" onsubmit="crazy();">
+
+<input type="submit">
+</form>
 <form>
 <input id="entry" type="text" placeholder="Word" />
 <input type="button" value="Save/Show" onclick="insert()" />
@@ -41,7 +45,24 @@ function clearAndShow () {
 	  messageBox.innerHTML += "Entry Words: " + entry.join(", ") + "<br/>";
 }
 
-setTimeout("location.href = '/result';",30000);
+//setTimeout("location.href = '/index';",30000);
+setTimeout(crazy,30000);
+function crazy(){
+	console.log("Crazy");
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      //document.getElementById("demo").innerHTML =
+	      console.log(this.responseText);
+	    }
+	  };
+	  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	  xhttp.open("POST", "/index", true);
+	  xhttp.send("entry=" + JSON.stringify(entry));
+	  //xhttp.send(entry);
+	  return true;
+}
+
 window.onload = function(){
 
 	(function(){
