@@ -37,6 +37,11 @@ public class Rootword {
 	public Rootword(String wordname) {
 		this.wordname = wordname;
 	}
+	
+	public Rootword(Rootword rootword) {
+		this.wordid = rootword.getWordid();
+		this.wordname = rootword.getWordname();
+	}
 
 	public Long getWordid() {
 		return wordid;
