@@ -12,13 +12,19 @@ import org.springframework.beans.factory.annotation.Value;
  * April 2018 Cohort
  */
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gc.scrumble.oops.entity.Rootword;
+
 @Controller
+@SessionAttributes("rootword")
 public class OopsController {
 
 	@Value("${oops.apikey}")
@@ -30,37 +36,31 @@ public class OopsController {
 	}
 	
 	@PostMapping("/index")
-	//@RequestMapping(value = "/index", method = RequestMethod.POST)
 	@ResponseBody
-	public String findFactType(@RequestParam(name="entry", required = false) String [] wordarray) {
+	public String checkEntries(@RequestParam(name="entry", required = false) String [] wordarray, @ModelAttribute("rootword") Rootword rootword, Model model) {
 		
-		
-System.out.println("wordarray:" + Arrays.toString(wordarray));
-
-		String rootword = "rootword";
-		// convert array to hash set
+		// convert array to hash set to eliminate duplicate words
 		Set<String> wordset = new HashSet<>();
 		for (String w : wordarray) {
 			if (wordset.add(w) == false) {
-				System.out.println("found duplicate: " + w);
 			}
-			System.out.println(wordset.toString());
 		}
+		
 		// convert hash set to a new array
 		String[] wordlist = new String[wordset.size()];
 		wordlist = wordset.toArray(wordlist);
-		System.out.println(Arrays.toString(wordlist));
 		
 		int score = 0;
 		boolean validEntry = true;
-		String temproot = rootword;
-
-		System.out.println("rootword= " + rootword + " wordlist= " + wordlist[0] + ", " + wordlist[1]);
+		model.addAttribute("rootword" , rootword);
+		Rootword workroot = new Rootword();
+		workroot = rootword;
+		String temproot = workroot.getWordname();
+		
 		// cycling through list of entered words
 		for (int i = 0; i <= wordlist.length - 1; i++) {
-			System.out.println("i = " + i);
 			validEntry = true;
-			temproot = rootword;
+			temproot = workroot.getWordname();
 
 			// i is the number of entered words
 			// k is the length of each entered word
@@ -74,21 +74,17 @@ System.out.println("wordarray:" + Arrays.toString(wordarray));
 
 			// for each letter of the entered word...
 			for (int k = 0; k <= (eword.length - 1); k++) {
-				System.out.println("k = " + k);
 
 				int j = 0;
 
 				// loop through letters of root word to find a letter match
 				while (j <= (root.length - 1) && eword[k] != root[j]) {
-					System.out.println("j = " + j);
-					System.out.println("eword[k]= " + eword[k] + ", root[j]= " + root[j]);
 					j++;
-					System.out.println("temproot size = " + temproot.length());
 				}
 
 				// determine whether we found a match or reached the end
 				// if (eword[k] == root[j]) {
-				if (j == (root.length - 1)) {
+				if (j == (root.length)) {
 
 					validEntry = false;
 					k = eword.length;
@@ -100,7 +96,6 @@ System.out.println("wordarray:" + Arrays.toString(wordarray));
 				}
 			}
 			if (validEntry) {
-				System.out.println("API called for " + wordlist[i]);
 				WordnikAPI nik = new WordnikAPI();
 				if (nik.wordnikValidWord(wordlist[i], key)) {
 					score++;
