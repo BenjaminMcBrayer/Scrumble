@@ -11,6 +11,8 @@
 <h2>Congratulations! You have Scrumbled!</h2>
 <h3>Your score is: </h3> ${score }
 
+<h3>Your max score is :</h3> ${maxscore }
+
 
 </body>
 </html>

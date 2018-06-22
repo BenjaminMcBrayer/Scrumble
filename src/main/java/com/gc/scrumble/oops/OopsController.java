@@ -124,8 +124,13 @@ public class OopsController {
 		System.out.println("GameScore= " + gameScore);
 		sR.save(gameScore);
 		
+		
+		System.out.println("Maxscore= " + sR.getMaxscore(userid));
+		model.addAttribute("maxscore", sR.getMaxscore(userid));
+		
 		return new ModelAndView("result", "score", score);
 
 	}
+
 
 }
