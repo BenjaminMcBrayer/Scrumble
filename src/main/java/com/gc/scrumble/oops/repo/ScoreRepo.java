@@ -12,7 +12,13 @@ public interface ScoreRepo extends JpaRepository<Score, Long> {
 	
 	@Query(value = "select max(s.scoreval) from scores s where s.userid =:userid", nativeQuery = true)			
 	public long getMaxscore(@Param("userid") long userid);
-	
+
+	@Query(value = "select max(s.scoreval) from scores s where s.userid =:userid and wordid=:wordid", nativeQuery = true)			
+	public long getMaxwordscore(@Param("userid") long userid, @Param("wordid") long wordid);
+
+	@Query(value = "select avg(s.scoreval) from scores s where wordid=:wordid", nativeQuery = true)			
+	public long getAvgwordscore(@Param("wordid") long wordid);
+
 	public Score findScoreByUserid(Long userid);
 	
 	public Score findScoreByWordid(Long wordid);

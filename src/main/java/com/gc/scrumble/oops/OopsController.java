@@ -124,9 +124,9 @@ public class OopsController {
 		System.out.println("GameScore= " + gameScore);
 		sR.save(gameScore);
 		
-		
-		System.out.println("Maxscore= " + sR.getMaxscore(userid));
 		model.addAttribute("maxscore", sR.getMaxscore(userid));
+		model.addAttribute("maxwordscore", sR.getMaxwordscore(userid, gameWordId));
+		model.addAttribute("avgwordscore", sR.getAvgwordscore(gameWordId));
 		
 		return new ModelAndView("result", "score", score);
 

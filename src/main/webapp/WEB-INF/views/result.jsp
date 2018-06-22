@@ -9,9 +9,13 @@
 </head>
 <body>
 <h2>Congratulations! You have Scrumbled!</h2>
-<h3>Your score is: </h3> ${score }
+<h3>Your score is:  ${score }</h3> 
 
-<h3>Your max score is :</h3> ${maxscore }
+<h3>Your max score is:  ${maxscore }</h3> 
+
+<h3>Your max score for this word is:  ${maxwordscore }</h3> 
+
+<h3>The average score for this word is:  ${avgwordscore }</h3>
 <form action="playAgain">
 <h4>
 Would you like to Re-Scrumble?
