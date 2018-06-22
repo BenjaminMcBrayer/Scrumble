@@ -1,6 +1,8 @@
 package com.gc.scrumble.oops;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -50,11 +52,15 @@ public class OopsController {
 	@ResponseBody
 	public ModelAndView checkEntries(@RequestParam(name="entry", required = false) String [] wordarray, 
 			@ModelAttribute("rootword") Rootword gameWord, @ModelAttribute("username1") String player, Model model) {
+		List<String> duplicates = new ArrayList<String>();
+		List<String> invalids = new ArrayList<String>();
 		
 		// convert array to hash set to eliminate duplicate words
 		Set<String> wordset = new HashSet<>();
+		
 		for (String w : wordarray) {
 			if (wordset.add(w) == false) {
+				duplicates.add(w);
 			}
 		}
 		
@@ -97,7 +103,7 @@ public class OopsController {
 				// determine whether we found a match or reached the end
 				// if (eword[k] == root[j]) {
 				if (j == (root.length)) {
-
+					invalids.add(wordlist[i]);
 					validEntry = false;
 					k = eword.length;
 
@@ -111,6 +117,8 @@ public class OopsController {
 				WordnikAPI nik = new WordnikAPI();
 				if (nik.wordnikValidWord(wordlist[i], key)) {
 					score++;
+				} else {
+					invalids.add(wordlist[i]);
 				}
 			}
 		}
@@ -127,6 +135,10 @@ public class OopsController {
 		model.addAttribute("maxscore", sR.getMaxscore(userid));
 		model.addAttribute("maxwordscore", sR.getMaxwordscore(userid, gameWordId));
 		model.addAttribute("avgwordscore", sR.getAvgwordscore(gameWordId));
+		System.out.println("Duplicates: " + duplicates.toString());
+		System.out.println("Invalids: " + invalids.toString());
+		model.addAttribute("duplicates", duplicates);
+		model.addAttribute("invalids", invalids);
 		
 		return new ModelAndView("result", "score", score);
 
