@@ -123,6 +123,17 @@ public class LogicController {
 		model.addAttribute("rootword", rootword);
 		return mv;
 	}
+	@RequestMapping("playAgain")
+	public ModelAndView playAgain(HttpSession session, Model model) {
+		List<Rootword> rootwordList = new ArrayList<>();
+		rootwordList = rP.findAll();
+		long listLength = rootwordList.size();
+		int randomIndex = (int) (Math.random() * listLength);
+		Rootword rootword = rootwordList.get(randomIndex);
+		ModelAndView mv = new ModelAndView("gameboard", "rootword", rootword);
+		model.addAttribute("rootword", rootword);
+		return mv;
+	}
 	
 	@RequestMapping("secondplay")
 	public ModelAndView secondPlay(HttpSession session, Model model) {

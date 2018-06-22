@@ -12,7 +12,12 @@
 <h3>Your score is: </h3> ${score }
 
 <h3>Your max score is :</h3> ${maxscore }
-
+<form action="playAgain">
+<h4>
+Would you like to Re-Scrumble?
+<input  type="submit" value="Re-Scrumble">
+</h4>
+</form>
 
 </body>
 </html>
