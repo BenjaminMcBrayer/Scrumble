@@ -29,9 +29,9 @@ div{text-align: center;}
 	<br>
 	<h3>
 	<form action="result" method="post" onsubmit="crazy();"></form>
-	<form>
+	<form onsubmit="insert(); event.preventDefault();">
 		<input id="entry" type="text" placeholder="Word" /> 
-		<input type="button" value="Save/Show" onclick="insert()" />
+		<input type="submit" value="Save/Show" />
 	</form>
 	</h3>
 	<h4>
