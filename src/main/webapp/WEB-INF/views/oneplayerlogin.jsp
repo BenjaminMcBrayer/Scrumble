@@ -48,6 +48,10 @@
 	</form>
 	<br>
 	<p>${welcome1}${failure1}</p>
+	<h2>How to play:</h2>
+	<h4>You will be given a base word.  </h4>
+	<h4>Look at the letters in the word and type as many words as you can using only the letters in the base word.</h4>
+	<h4>You will have 30 seconds.</h4>
 	<form action="play">
 		<button id="play" name="play">Play</button>
 	</form>
