@@ -87,7 +87,7 @@ public class LogicController {
 
 	// Two Player Version Mappings
 	@RequestMapping("/twoplayerlogin")
-	public String dummylogin() {
+	public String twoPlayerLogin() {
 		return "twoplayerlogin";
 	}
 
@@ -101,107 +101,90 @@ public class LogicController {
 		return mv;
 	}
 
-	// Register first player (if player is new).
+	// Register and log in first player (if player is new).
 	@RequestMapping("twoplayeradd1")
 	@ModelAttribute("numPlayers")
 	public ModelAndView addPlayerOne(@ModelAttribute("numPlayers") String numPlayers,
-			@RequestParam("newusername1") String username, @RequestParam("newpword1") String pword, HttpSession session,
+			@RequestParam("username1") String username1, @RequestParam("newpword1") String pword, HttpSession session,
 			Model model) {
 		model.addAttribute("numPlayers", numPlayers);
 		System.out.println(numPlayers);
-		User newuser = new User(username, pword);
-		Optional<User> user = uP.findByUsername(username);
+		User newuser = new User(username1, pword);
+		Optional<User> user = uP.findByUsername(username1);
 		if (user.isPresent()) {
 			String message = "User name already exists. Please choose another or log in below.";
 			ModelAndView mv = new ModelAndView("twoplayerlogin1", "alreadyexists1", message);
 			return mv;
 		} else {
 			uP.save(newuser);
-			model.addAttribute("newusername1", username);
-			String message = "Thank you, " + username + ".";
-			return new ModelAndView("twoplayersecondlogin", "thankyou1", message);
-		}
-	}
-
-	// Log in first player (if player is new).
-	@RequestMapping("twoplayersecondlogin1")
-	@ModelAttribute("numPlayers")
-	public ModelAndView firstUserSecondLogin(@ModelAttribute("numPlayers") String numPlayers,
-			@RequestParam("username1") String username, @RequestParam("pword1") String pword, HttpSession session,
-			Model model) {
-		model.addAttribute("numPlayers", numPlayers);
-		System.out.println(numPlayers);
-		Optional<User> user = uP.findByUsername(username);
-		if (numPlayers.equals("1")) {
-			if (user.isPresent() && user.get().getPword().equals(pword)) {
+			model.addAttribute("username1", username1);
+			String message = "Thank you, " + username1 + ".";
+			if (numPlayers.equals("1")) {
 				ModelAndView mv = new ModelAndView("readandplay", "secondwelcome1",
-						"Welcome to Scrumble, " + username + "!");
-				model.addAttribute("username1", username);
+						"Welcome to Scrumble, " + username1 + "!");
+				model.addAttribute("username1", username1);
 				return mv;
 			}
-		}
-		if (numPlayers.equals("2")) {
-			if (user.isPresent() && user.get().getPword().equals(pword)) {
-				ModelAndView mv = new ModelAndView("twoplayerlogin2", "secondwelcome1",
-						"Welcome to Scrumble, " + username + "!");
-				model.addAttribute("username1", username);
-				return mv;
+			if (numPlayers.equals("2")) {
+				return new ModelAndView("twoplayerlogin2", "thankyou1", message);
 			}
 		}
-		return new ModelAndView("twoplayersecondlogin", "secondfailure1",
-				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
+		return new ModelAndView();
 	}
 
 	// Log in first player (if player is returning).
 	@RequestMapping("twoplayerlogin1")
 	@ModelAttribute("numPlayers")
 	public ModelAndView firstUserFirstLogin(@ModelAttribute("numPlayers") String numPlayers,
-			@RequestParam("username1") String username, @RequestParam("pword1") String pword, HttpSession session,
+			@RequestParam("username1") String username1, @RequestParam("pword1") String pword, HttpSession session,
 			Model model) {
 		model.addAttribute("numPlayers", numPlayers);
 		System.out.println(numPlayers);
-		Optional<User> user = uP.findByUsername(username);
-		if (numPlayers.equals("1")) {
-			if (user.isPresent() && user.get().getPword().equals(pword)) {
-				ModelAndView mv = new ModelAndView("readandplay", "welcome1", "Welcome to Scrumble, " + username + "!");
-				model.addAttribute("username1", username);
-				return mv;
+		Optional<User> user = uP.findByUsername(username1);
+		if (user.isPresent() && user.get().getPword().equals(pword)) {
+			if (numPlayers.equals("1")) {
+				ModelAndView mv1 = new ModelAndView("readandplay", "welcome1", "Welcome to Scrumble, " + username1 + "!");
+				model.addAttribute("username1", username1);
+				return mv1;
 			}
-		}
-		if (numPlayers.equals("2")) {
-			if (user.isPresent() && user.get().getPword().equals(pword)) {
-				ModelAndView mv = new ModelAndView("twoplayerlogin2", "secondwelcome1",
-						"Welcome to Scrumble, " + username + "!");
-				model.addAttribute("username1", username);
-				return mv;
+			if (numPlayers.equals("2")) {
+				ModelAndView mv2 = new ModelAndView("twoplayerlogin2", "secondwelcome1",
+						"Welcome to Scrumble, " + username1 + "!");
+				model.addAttribute("username1", username1);
+				return mv2;
 			}
-		}
+		} 
 		return new ModelAndView("twoplayerlogin1", "failure1",
 				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
 	}
 
-	// Register second player (if player is new).
+	// Register and log in second player (if player is new).
 	@RequestMapping("twoplayeradd2")
 	@ModelAttribute("numPlayers")
-	public ModelAndView addPlayerTwo(@RequestParam("newusername2") String username,
-			@RequestParam("newpword2") String pword, @ModelAttribute("numPlayers") String numPlayers,
-			HttpSession session, Model model) {
+	public ModelAndView addPlayerTwo(@ModelAttribute("numPlayers") String numPlayers,
+			@ModelAttribute("username1") String username1,
+			@RequestParam("username2") String username2, @RequestParam("newpword2") String pword, HttpSession session,
+			Model model) {
 		model.addAttribute("numPlayers", numPlayers);
+		model.addAttribute("username1", username1);
 		System.out.println(numPlayers);
-		User newuser = new User(username, pword);
-		Optional<User> user = uP.findByUsername(username);
+		User newuser = new User(username2, pword);
+		Optional<User> user = uP.findByUsername(username2);
 		if (user.isPresent()) {
 			String message = "User name already exists. Please choose another or log in below.";
-			ModelAndView mv = new ModelAndView("twoplayerlogin2", "alreadyexists2", message);
-			return mv;
+			ModelAndView mv1 = new ModelAndView("twoplayerlogin2", "alreadyexists2", message);
+			return mv1;
 		} else {
 			uP.save(newuser);
-			model.addAttribute("newusername2", username);
-			String message = "Thank you, " + username + ".";
-			return new ModelAndView("twoplayersecondlogin1", "thankyou2", message);
+			model.addAttribute("username2", username2);
+			// But what if the first user was new...? What about "newusername1"?
+			String message = "Welcome to Scrumble, " + username1 + " and " + username2 + "!";
+			ModelAndView mv2 = new ModelAndView("readandplay", "secondwelcome2", message);
+			model.addAttribute("username2", username2);
+			return mv2;
 		}
 	}
-	
+
 	// Log in second player (if player is returning).
 	@RequestMapping("twoplayerlogin2")
 	@ModelAttribute("numPlayers")
@@ -219,24 +202,6 @@ public class LogicController {
 			return mv;
 		}
 		return new ModelAndView("twoplayerlogin2", "failure2",
-				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
-	}
-
-	// Log in second player (if player is new).
-	@RequestMapping("secondlogin2")
-	@ModelAttribute("numPlayers")
-	public ModelAndView secondUserSecondLogin(@RequestParam("username2") String username2,
-			@RequestParam("pword2") String pword, @ModelAttribute("username1") String username1, HttpSession session,
-			Model model) {
-		model.addAttribute("username1", username1);
-		Optional<User> user = uP.findByUsername(username2);
-		if (user.isPresent() && user.get().getPword().equals(pword)) {
-			ModelAndView mv = new ModelAndView("readandplay", "secondwelcome2",
-					"Welcome to Scrumble, " + username1 + " and " + username2 + "!");
-			model.addAttribute("username2", username2);
-			return mv;
-		}
-		return new ModelAndView("twoplayersecondlogin1", "secondfailure2",
 				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
 	}
 
@@ -277,6 +242,18 @@ public class LogicController {
 		Rootword rootword = rootwordList.get(randomIndex);
 		ModelAndView mv = new ModelAndView("gameboard", "rootword", rootword);
 		model.addAttribute("rootword", rootword);
+		return mv;
+	}
+
+	@RequestMapping("playertwoplay")
+	@ModelAttribute("rootword")
+	public ModelAndView playerTwoPlay(@ModelAttribute("rootword") Rootword rootword,
+			@ModelAttribute("numPlayers") String numPlayers, @ModelAttribute("username2") String username,
+			HttpSession session, Model model) {
+		ModelAndView mv = new ModelAndView("gameboard", "rootword", rootword);
+		model.addAttribute("rootword", rootword);
+		model.addAttribute("numPlayers", numPlayers);
+		model.addAttribute("username2", username);
 		return mv;
 	}
 }

@@ -22,7 +22,7 @@
 			<fieldset>
 			<legend>Please create an account.</legend>
 			<label for="username">User Name:</label> 
-			<input type="text" name="newusername1" id="newusername1" required></input>
+			<input type="text" name="username1" id="newusername1" required></input>
 			<label for="pword">Password:</label>
 			<input type="password" name="newpword1" id="newpword1" required>
 			<input type="submit" value="Register">
