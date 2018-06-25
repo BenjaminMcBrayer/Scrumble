@@ -177,7 +177,6 @@ public class LogicController {
 		} else {
 			uP.save(newuser);
 			model.addAttribute("username2", username2);
-			// But what if the first user was new...? What about "newusername1"?
 			String message = "Welcome to Scrumble, " + username1 + " and " + username2 + "!";
 			ModelAndView mv2 = new ModelAndView("readandplay", "secondwelcome2", message);
 			model.addAttribute("username2", username2);
@@ -245,7 +244,7 @@ public class LogicController {
 		return mv;
 	}
 
-	@RequestMapping("playertwoplay")
+	@RequestMapping("next")
 	@ModelAttribute("rootword")
 	public ModelAndView playerTwoPlay(@ModelAttribute("rootword") Rootword rootword,
 			@ModelAttribute("numPlayers") String numPlayers, @ModelAttribute("username2") String username,
