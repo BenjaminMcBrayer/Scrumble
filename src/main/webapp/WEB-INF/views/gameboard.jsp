@@ -20,7 +20,7 @@ div{text-align: center;}
 	<p>Time left: <span id="count">30</span> seconds...</p>
 	<h1>${rootword.wordname }</h1>
 	<br>
-	<br>
+
 	<h2>Words entered:</h2>
 	<br>
 	<div id="display"></div>
@@ -31,14 +31,9 @@ div{text-align: center;}
 	<form action="result" method="post" onsubmit="crazy();"></form>
 	<form onsubmit="insert(); event.preventDefault();">
 		<input id="entry" type="text" placeholder="Word" /> 
-		<input type="submit" value="Save/Show" />
 	</form>
 	</h3>
-	<h4>
-	<form method="get" action="/index">
-		<button type="submit">Scores</button>
-	</form>
-	</h4>
+
 </body>
 <script type="text/javascript">
 	var entry = [];
