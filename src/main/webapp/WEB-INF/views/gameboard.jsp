@@ -59,7 +59,7 @@ div{text-align: center;}
 	}
 	setTimeout(crazy, 30000);
 	setTimeout(next,30000);
-	setTimeout(entry,30000);
+	setTimeout(entry1,30000);
 	function crazy() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -76,7 +76,7 @@ div{text-align: center;}
 	function next(){
 		document.getElementById("next").style.visibility = "visible";
 	}
-	function entry(){
+	function entry1(){
 		document.getElementById("entry").style.visibility = "hidden";
 	}
 	window.onload = function() {
