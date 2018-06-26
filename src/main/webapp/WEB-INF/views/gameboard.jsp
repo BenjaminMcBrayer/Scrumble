@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>It's Scrumble Time!</title>
 </head>
 <style>
 h1 {text-align: center;}
@@ -40,7 +40,7 @@ div{text-align: center;}
 </body>
 <script type="text/javascript">
 	var entry = [];
-	var entryInput = document.getElementById("entry"); 
+	 var entryInput = document.getElementById("entry"); 
 	var messageBox = document.getElementById("display");
 	var score = document.getElementById("score");
 	function insert() {
@@ -57,10 +57,10 @@ div{text-align: center;}
 		document.getElementById("entry").style.visibility = "visible";
 		document.getElementById("next").style.visibility = "hidden";
 	}
-	setTimeout(results, 30000);
+	setTimeout(crazy, 30000);
 	setTimeout(next,30000);
 	setTimeout(entry1,30000);
-	function results() {
+	function crazy() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -80,6 +80,7 @@ div{text-align: center;}
 		document.getElementById("entry").style.visibility = "hidden";
 	}
 	window.onload = function() {
+			console.log("CRAAAAZY FUNCTION ENGAGED!!!");
 		(function() {
 			beforeTimer();
 			var counter = 30;
@@ -97,4 +98,5 @@ div{text-align: center;}
 		})();
 	}
 </script>
+
 </html>
