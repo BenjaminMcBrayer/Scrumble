@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SCRUMBLE</title>
 </head>
-<body">
+<body>
 	${oneplayerlogin}
 	<h1>Are you ready?</h1>
 	<h4>If you're new to the game, create an account. If you're an experienced player, just log in.</h4>

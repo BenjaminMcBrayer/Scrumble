@@ -48,7 +48,7 @@ ${numPlayers}
 	</form>
 	</form>
 	<form action="playAgain" method="post" id="playAgain" >
-	<input type="submit" value="Play Again">
+	<input type="submit" value="Re-Scrumble">
 	</form>
 
 </body>

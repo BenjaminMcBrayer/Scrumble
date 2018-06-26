@@ -29,12 +29,6 @@
 	<h3>Your max score for this word is: ${maxwordscore }</h3>
 
 	<h3>The average score for this word is: ${avgwordscore }</h3>
-	<form action="playAgain">
-		<h4>
-			Would you like to Re-Scrumble? <input type="submit"
-				value="Re-Scrumble">
-		</h4>
-	</form>
 
 </body>
 </html>

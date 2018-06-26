@@ -39,8 +39,11 @@ div{text-align: center;}
 		<button type="submit">Scores</button>
 	</form>
 	</h4>
-	<form id="next" action = "gameboard2">
-	Are to Scrumble player 2?<br><a href="/gameboard2">GO</a>
+	<form id="rematch" action = "playAgain">
+	Would you like to rematch? <br><button type="submit">Rematch</button>
+	</form>
+	<form id="logout" action = "logout2">
+	<button type="submit">Logout</button>
 	</form>
 </body>
 <script type="text/javascript">
@@ -54,7 +57,8 @@ var s1 = document.getElementById("addPlayer");
 		clearAndShow();
 	}
 	function hideNext() {
-		document.getElementById("next").style.visibility = "hidden";
+		document.getElementById("rematch").style.visibility = "hidden";
+		document.getElementById("logout").style.visibility = "hidden";
 	}
 	function clearAndShow() {
 		// Clear our fields
@@ -62,10 +66,16 @@ var s1 = document.getElementById("addPlayer");
 		messageBox.innerHTML = "";
 		messageBox.innerHTML += entry.join(", ") + "<br/>";
 	}
+	function beforeTimer(){
+		document.getElementById("entry").style.visibility = "visible";
+		document.getElementById("rematch").style.visibility = "hidden";
+		document.getElementById("playAgain").style.visibility = "hidden";
+	}
 	setTimeout(crazy,30000);
 	setTimeout(next,30000);
 	function next(){
-		document.getElementById("next").style.visibility = "visible";
+		document.getElementById("rematch").style.visibility = "visible";
+		document.getElementById("logout").style.visibility = "visible";
 	}
 	function crazy() {
 		var xhttp = new XMLHttpRequest();
@@ -74,7 +84,7 @@ var s1 = document.getElementById("addPlayer");
 				score.innerHTML = "The score is: " + this.responseText;
 			}
 		};
-		xhttp.open("POST", "/index", true);
+		xhttp.open("POST", "/index1", true);
 		xhttp.setRequestHeader('Content-type',
 				'application/x-www-form-urlencoded');
 		xhttp.send("entry=" + entry);
