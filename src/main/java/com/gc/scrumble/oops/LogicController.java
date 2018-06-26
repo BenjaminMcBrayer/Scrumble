@@ -39,14 +39,18 @@ public class LogicController {
 
 	// One Player Version Mappings
 	@RequestMapping("/")
-	public String onePlayerLogin() {
-		return "oneplayerlogin";
+	public ModelAndView onePlayerLogin(HttpSession session, Model model) {
+		ModelAndView mv = new ModelAndView("oneplayerlogin");
+		String numPlayers = "1";
+		model.addAttribute("numPlayers", numPlayers);
+		return mv;
 	}
 
 	@RequestMapping("oneplayeradd1")
+	@ModelAttribute("numPlayers")
 	public ModelAndView addUserAndLogin(@RequestParam("username1") String username,
-			@RequestParam("pword1") String pword, @ModelAttribute("numPlayers") String numPlayers, HttpSession session, Model model) {
-		numPlayers = "1";
+			@RequestParam("pword1") String pword, HttpSession session, Model model) {
+		String numPlayers = "1";
 		model.addAttribute("numPlayers", numPlayers);
 		User newuser = new User(username, pword);
 		Optional<User> user = uP.findByUsername(username);
