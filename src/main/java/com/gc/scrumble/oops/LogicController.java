@@ -45,7 +45,9 @@ public class LogicController {
 
 	@RequestMapping("oneplayeradd1")
 	public ModelAndView addUserAndLogin(@RequestParam("username1") String username,
-			@RequestParam("pword1") String pword, HttpSession session, Model model) {
+			@RequestParam("pword1") String pword, @ModelAttribute("numPlayers") String numPlayers, HttpSession session, Model model) {
+		numPlayers = "1";
+		model.addAttribute("numPlayers", numPlayers);
 		User newuser = new User(username, pword);
 		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent()) {
@@ -62,7 +64,9 @@ public class LogicController {
 
 	@RequestMapping("login1")
 	public ModelAndView loginExistingUser(@RequestParam("username1") String username, @RequestParam("pword1") String pword,
-			HttpSession session, Model model) {
+			@ModelAttribute("numPlayers") String numPlayers, HttpSession session, Model model) {
+		numPlayers = "1";
+		model.addAttribute("numPlayers", numPlayers);
 		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
 			ModelAndView mv = new ModelAndView("readandplay", "welcome1", "Welcome to Scrumble, " + username + "!");
@@ -70,20 +74,6 @@ public class LogicController {
 			return mv;
 		}
 		return new ModelAndView("oneplayerlogin", "failure1",
-				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
-	}
-
-	@RequestMapping("secondlogin1")
-	public ModelAndView secondUserLogin1(@RequestParam("username1") String username,
-			@RequestParam("pword1") String pword, HttpSession session, Model model) {
-		Optional<User> user = uP.findByUsername(username);
-		if (user.isPresent() && user.get().getPword().equals(pword)) {
-			ModelAndView mv = new ModelAndView("secondlogin", "secondwelcome1",
-					"Welcome to Scrumble, " + username + "!");
-			model.addAttribute("username1", username);
-			return mv;
-		}
-		return new ModelAndView("secondlogin", "secondfailure1",
 				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
 	}
 
@@ -225,7 +215,7 @@ public class LogicController {
 	public ModelAndView playerTwoPlay(@ModelAttribute("rootword") Rootword rootword,
 			@ModelAttribute("numPlayers") String numPlayers, @ModelAttribute("username2") String username,
 			HttpSession session, Model model) {
-		ModelAndView mv = new ModelAndView("gameboard", "rootword", rootword);
+		ModelAndView mv = new ModelAndView("gameboard2", "rootword", rootword);
 		model.addAttribute("rootword", rootword);
 		model.addAttribute("numPlayers", numPlayers);
 		model.addAttribute("username2", username);
