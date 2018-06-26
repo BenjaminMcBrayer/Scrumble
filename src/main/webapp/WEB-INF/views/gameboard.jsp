@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>It's Scrumble Time!</title>
 </head>
 <style>
 h1 {text-align: center;}
@@ -16,6 +16,7 @@ p {text-decoration: underline overline;text-align: right;}
 div{text-align: center;}
 </style>
 <body>
+<div id="numPlayers" data-prodnumber="${numPlayers}"/>
 	<h1>Lets Get Ready To Scrumble!!!</h1>
 	<p>Time left: <span id="count">30</span> seconds...</p>
 	<h1>${rootword.wordname }</h1>
@@ -28,6 +29,7 @@ div{text-align: center;}
 	<div id="score"></div>
 	<br>
 	<h3>
+	
 	<form action="result" method="post" onsubmit="crazy();"></form>
 	<form onsubmit="insert(); event.preventDefault();">
 		<input id="entry" type="text" placeholder="Word" autofocus/>	 
@@ -36,11 +38,14 @@ div{text-align: center;}
 	<form action="next" method="post" id="next" >
 	<input type="submit" value="Next Player">
 	</form>
+	<form action="playAgain" method="post" id="playAgain" >
+	<input type="submit" value="Play Again">
+	</form>
 
 </body>
 <script type="text/javascript">
 	var entry = [];
-	var entryInput = document.getElementById("entry"); 
+	 var entryInput = document.getElementById("entry"); 
 	var messageBox = document.getElementById("display");
 	var score = document.getElementById("score");
 	function insert() {
@@ -56,11 +61,12 @@ div{text-align: center;}
 	function beforeTimer(){
 		document.getElementById("entry").style.visibility = "visible";
 		document.getElementById("next").style.visibility = "hidden";
+		document.getElementById("playAgain").style.visibility = "hidden";
 	}
-	setTimeout(results, 30000);
+	setTimeout(crazy, 30000);
 	setTimeout(next,30000);
 	setTimeout(entry1,30000);
-	function results() {
+	function crazy() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -74,12 +80,16 @@ div{text-align: center;}
 		return true;
 	}
 	function next(){
+		if(numPlayers != "1"){
 		document.getElementById("next").style.visibility = "visible";
-	}
+	}else{
+		document.getElementById("playAgain").style.visibility = "visible";
+	}}
 	function entry1(){
 		document.getElementById("entry").style.visibility = "hidden";
 	}
 	window.onload = function() {
+			console.log("CRAAAAZY FUNCTION ENGAGED!!!");
 		(function() {
 			beforeTimer();
 			var counter = 30;
@@ -97,4 +107,5 @@ div{text-align: center;}
 		})();
 	}
 </script>
+
 </html>
