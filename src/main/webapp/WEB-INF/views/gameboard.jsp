@@ -15,7 +15,7 @@ h4{text-align: right;}
 p {text-decoration: underline overline;text-align: right;}
 div{text-align: center;}
 </style>
-<body>
+<body style="background-color:#ACE0FF">
 <div id="numPlayers" data-prodnumber="${numPlayers}"/>
 ${numPlayers}
 	<h1>Lets Get Ready To Scrumble!!!</h1>
@@ -27,7 +27,7 @@ ${numPlayers}
 	<br>
 	<div id="display"></div>
 	<br>
-	<div id="score"></div>
+	<div  style="background-color: DodgerBlue;" background-size: 65px 100px; id="score"></div>
 	<br>
 	<h3>
 	
@@ -39,11 +39,11 @@ ${numPlayers}
 	<form action="next" method="post" id="next" >
 	<input type="submit" value="Next Player">
 	</form>
-	<form action="logout1" method="post" id="logout2" >
+	<form action="logout2" method="post" id="logout2" >
 	<input type="submit" value="Logout">
 	</form>
 	</form>
-	<form action="logout" method="post" id="logout1" >
+	<form action="logout1" method="post" id="logout1" >
 	<input type="submit" value="Logout">
 	</form>
 	</form>

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body onload="hideNPl(); hideLogin();">
+<body onload="hideNPl(); hideLogin();" color="ACE0FF">
 	${login}
 	<h1>Get ready to SCRUMBLE!!!</h1>
 	<form action="numPlay">
