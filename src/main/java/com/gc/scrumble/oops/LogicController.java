@@ -42,8 +42,8 @@ public class LogicController {
 	}
 
 	@RequestMapping("oneplayeradd1")
-	public ModelAndView addPlayerOne(@RequestParam("newusername1") String username,
-			@RequestParam("newpword1") String pword, HttpSession session, Model model) {
+	public ModelAndView addUserAndLogin(@RequestParam("username1") String username,
+			@RequestParam("pword1") String pword, HttpSession session, Model model) {
 		User newuser = new User(username, pword);
 		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent()) {
@@ -52,18 +52,18 @@ public class LogicController {
 			return mv;
 		} else {
 			uP.save(newuser);
-			model.addAttribute("newusername1", username);
-			String message = "Thank you, " + username + ".";
-			return new ModelAndView("secondlogin", "thankyou1", message);
+			model.addAttribute("username1", username);
+			String message = "Thank you, " + username + ". Welcome to Scrumble!";
+			return new ModelAndView("readandplay", "thankyou1", message);
 		}
 	}
 
 	@RequestMapping("login1")
-	public ModelAndView userLogin1(@RequestParam("username1") String username, @RequestParam("pword1") String pword,
+	public ModelAndView loginExistingUser(@RequestParam("username1") String username, @RequestParam("pword1") String pword,
 			HttpSession session, Model model) {
 		Optional<User> user = uP.findByUsername(username);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
-			ModelAndView mv = new ModelAndView("oneplayerlogin", "welcome1", "Welcome to Scrumble, " + username + "!");
+			ModelAndView mv = new ModelAndView("readandplay", "welcome1", "Welcome to Scrumble, " + username + "!");
 			model.addAttribute("username1", username);
 			return mv;
 		}

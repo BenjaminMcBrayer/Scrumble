@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>SCRUMBLE</title>
 </head>
-<body onload="hide();">
+<body">
 	${oneplayerlogin}
 	<h1>Are you ready?</h1>
 	<h4>If you're new to the game, create an account. If you're an experienced player, just log in.</h4>
@@ -20,15 +20,15 @@
 		</select>
 	</form>
 	<br> -->
-	<form action="add1" name="registration1" method="post">
+	<form action="oneplayeradd1" name="registration1" method="post">
 		<div id="register1">
 			<fieldset>
 				<legend>Please create an account.</legend>
 				<label for="username">User Name:</label> 
-				<input type="text" name="newusername1" id="newusername1" required></input>
+				<input type="text" name="username1" id="newusername1" required></input>
 				<label for="pword">Password:</label>
-				<input type="password" name="newpword1" id="newpword1" required>
-				<button type="submit" onclick="hideshowLogin1()">Register</button>
+				<input type="password" name="pword1" id="newpword1" required>
+				<button type="submit">Register</button>
 			</fieldset>
 		</div>
 	</form>
@@ -47,13 +47,12 @@
 		</div>
 	</form>
 	<br>
-	<p>${welcome1}${failure1}</p>
-	<h2>How to play:</h2>
+	<p>${failure1}</p>
+	<!-- <h2>How to play:</h2>
 	<h4>You will be given a base word.  </h4>
 	<h4>Look at the letters in the word and type as many words as you can using only the letters in the base word.</h4>
 	<h4>You will have 30 seconds.</h4>
 	<form action="play">
 		<button id="play" name="play">Play</button>
-	</form>
-<!-- 	<script type="text/javascript" src="js/hideandseek.js"></script> -->
+	</form> -->
 </body>

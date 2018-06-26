@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>SCRUMBLE</title>
 </head>
 <body>
-${welcome1}${welcome2}${secondwelcome2}
+${welcome1}${welcome2}${secondwelcome2}${thankyou1}
 <h2>How to play:</h2>
 	<h4>You will be given a base word.  </h4>
 	<h4>Look at the letters in the word and type as many words as you can using only the letters in the base word.</h4>
