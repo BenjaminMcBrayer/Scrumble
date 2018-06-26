@@ -31,7 +31,7 @@ import com.gc.scrumble.oops.repo.ScoreRepo;
 import com.gc.scrumble.oops.repo.UsersRepository;
 
 @Controller
-@SessionAttributes({ "rootword", "username1" })
+@SessionAttributes({ "rootword", "username1" ,"username2" })
 public class OopsController {
 
 	@Value("${oops.apikey}")
@@ -251,7 +251,7 @@ public class OopsController {
 				}
 			}
 		}
-		model.addAttribute("username1", player);
+		model.addAttribute("username2", player);
 		Optional<User> user = uP.findByUsername(player);
 		long userid = user.get().getUserid();
 

@@ -31,7 +31,6 @@ div{text-align: center;}
 	<form action="result" method="post" onsubmit="crazy();"></form>
 	<form onsubmit="insert(); event.preventDefault();">
 		<input id="entry" type="text" placeholder="Word" /> 
-		<input type="submit" value="Save/Show" />
 	</form>
 	</h3>
 	<h4>
@@ -51,7 +50,7 @@ var s1 = document.getElementById("addPlayer");
 	var entry = [];
 	var entryInput = document.getElementById("entry");
 	var messageBox = document.getElementById("display");
-	var score = document.getElementById("score");
+
 	function insert() {
 		entry.push(entryInput.value);
 		clearAndShow();
@@ -84,7 +83,7 @@ var s1 = document.getElementById("addPlayer");
 				score.innerHTML = "The score is: " + this.responseText;
 			}
 		};
-		xhttp.open("POST", "/index1", true);
+		xhttp.open("POST", "/index2", true);
 		xhttp.setRequestHeader('Content-type',
 				'application/x-www-form-urlencoded');
 		xhttp.send("entry=" + entry);
