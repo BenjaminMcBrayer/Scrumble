@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -218,7 +220,6 @@ public class LogicController {
 		return mv;
 	}
 
-
 	@RequestMapping("next")
 	@ModelAttribute("rootword")
 	public ModelAndView playerTwoPlay(@ModelAttribute("rootword") Rootword rootword,
@@ -228,6 +229,20 @@ public class LogicController {
 		model.addAttribute("rootword", rootword);
 		model.addAttribute("numPlayers", numPlayers);
 		model.addAttribute("username2", username);
+		return mv;
+	}
+	
+	@RequestMapping("/logout1")
+	public ModelAndView onePlayerLogout(HttpServletRequest request, HttpServletResponse reponse) {
+		ModelAndView mv = new ModelAndView("/");
+		request.getSession().invalidate();
+		return mv;
+	}
+	
+	@RequestMapping("/logout2")
+	public ModelAndView twoPlayerLogout(HttpServletRequest request, HttpServletResponse reponse) {
+		ModelAndView mv = new ModelAndView("/twoplayerlogin");
+		request.getSession().invalidate();
 		return mv;
 	}
 }
