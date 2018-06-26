@@ -158,5 +158,115 @@ public class OopsController {
 		return new ModelAndView("result", "score", score);
 
 	}
+	@PostMapping("/index2")
+	@ResponseBody
+	public ModelAndView checkEntries2(@RequestParam(name = "entry", required = false) String[] wordarray,
+			@ModelAttribute("rootword") Rootword gameWord, @ModelAttribute("username2") String player, Model model) {
+		List<String> duplicates = new ArrayList<String>();
+		List<String> invalids = new ArrayList<String>();
+			
+		// remove empty strings, in case user hits enter twice
+		List<String> temparray = new ArrayList<String>();
+		for (int m = 0; m <= wordarray.length - 1; m++) {
+			if (wordarray[m].isEmpty()) {
+			} else {
+				temparray.add(wordarray[m]);
+			}
+		}
+
+		// convert array to hash set to eliminate duplicate words
+		Set<String> wordset = new HashSet<>();
+
+		for (String w : temparray) {
+			if (wordset.add(w) == false) {
+				duplicates.add(w);
+			}
+		}
+
+		// convert hash set to a new array
+		String[] wordlist = new String[wordset.size()];
+		wordlist = wordset.toArray(wordlist);
+
+		long score = 0;
+		boolean validEntry = true;
+		model.addAttribute("rootword", gameWord);
+		
+		// Create new rootword object so we can use get wordname function
+		Rootword workroot = new Rootword();
+		workroot = gameWord;
+		String temproot = workroot.getWordname();
+
+		// cycling through list of entered words
+		for (int i = 0; i <= wordlist.length - 1; i++) {
+			validEntry = true;
+			temproot = workroot.getWordname();
+
+			// i is the number of entered words
+			// k is the length of each entered word
+			// j is the length of the root word
+
+			// creating a character string of the root word
+			char[] root = temproot.toCharArray();
+
+			// create a character string of the entered word
+			char[] eword = wordlist[i].toCharArray();
+
+			// for each letter of the entered word...
+			for (int k = 0; k <= (eword.length - 1); k++) {
+
+				int j = 0;
+
+				// loop through letters of root word to find a letter match
+				while (j <= (root.length - 1) && eword[k] != root[j]) {
+					j++;
+				}
+
+				// determine whether we found a match or reached the end
+				if (j == (root.length)) {
+					invalids.add(wordlist[i]);
+					validEntry = false;
+					k = eword.length;
+
+				} else {
+					String temp = Character.toString(eword[k]);
+					temproot = temproot.replaceFirst(temp, "");
+					root = temproot.toCharArray();
+				}
+			}
+			if (validEntry) {
+
+				// For backup, comment out the next two lines...
+				WordnikAPI nik = new WordnikAPI();
+				if (nik.wordnikValidWord(wordlist[i], key)) {
+					// Main API call ends here
+
+					// and uncomment these next two
+					// OwlbotAPI owl = new OwlbotAPI();
+					// if (owl.owlbotValidWord(wordlist[i])) {
+					// Backup API call ends here
+
+					score++;
+				} else {
+					invalids.add(wordlist[i]);
+				}
+			}
+		}
+		model.addAttribute("username1", player);
+		Optional<User> user = uP.findByUsername(player);
+		long userid = user.get().getUserid();
+
+		Long gameWordId = workroot.getWordid();
+		Score gameScore = new Score(score, userid, gameWordId);
+		sR.save(gameScore);
+
+		model.addAttribute("maxscore", sR.getMaxscore(userid));
+		model.addAttribute("maxwordscore", sR.getMaxwordscore(userid, gameWordId));
+		model.addAttribute("avgwordscore", sR.getAvgwordscore(gameWordId));
+		model.addAttribute("duplicates", duplicates);
+		model.addAttribute("invalids", invalids);
+
+		return new ModelAndView("result2", "score", score);
+
+	}
 
 }

@@ -17,6 +17,7 @@ div{text-align: center;}
 </style>
 <body>
 <div id="numPlayers" data-prodnumber="${numPlayers}"/>
+${numPlayers}
 	<h1>Lets Get Ready To Scrumble!!!</h1>
 	<p>Time left: <span id="count">30</span> seconds...</p>
 	<h1>${rootword.wordname }</h1>
@@ -38,12 +39,21 @@ div{text-align: center;}
 	<form action="next" method="post" id="next" >
 	<input type="submit" value="Next Player">
 	</form>
+	<form action="logout1" method="post" id="logout2" >
+	<input type="submit" value="Logout">
+	</form>
+	</form>
+	<form action="logout" method="post" id="logout1" >
+	<input type="submit" value="Logout">
+	</form>
+	</form>
 	<form action="playAgain" method="post" id="playAgain" >
 	<input type="submit" value="Play Again">
 	</form>
 
 </body>
 <script type="text/javascript">
+var numPlayers = ${numPlayers};
 	var entry = [];
 	 var entryInput = document.getElementById("entry"); 
 	var messageBox = document.getElementById("display");
@@ -62,6 +72,8 @@ div{text-align: center;}
 		document.getElementById("entry").style.visibility = "visible";
 		document.getElementById("next").style.visibility = "hidden";
 		document.getElementById("playAgain").style.visibility = "hidden";
+		document.getElementById("logout1").style.visibility = "hidden";
+		document.getElementById("logout2").style.visibility = "hidden";
 	}
 	setTimeout(crazy, 30000);
 	setTimeout(next,30000);
@@ -82,14 +94,17 @@ div{text-align: center;}
 	function next(){
 		if(numPlayers != "1"){
 		document.getElementById("next").style.visibility = "visible";
+		document.getElementById("logout2").style.visibility = "visible";
 	}else{
 		document.getElementById("playAgain").style.visibility = "visible";
+		document.getElementById("logout1").style.visibility = "visible";
 	}}
 	function entry1(){
 		document.getElementById("entry").style.visibility = "hidden";
 	}
 	window.onload = function() {
 			console.log("CRAAAAZY FUNCTION ENGAGED!!!");
+			console.log(numPlayers);
 		(function() {
 			beforeTimer();
 			var counter = 30;
