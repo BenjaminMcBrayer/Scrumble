@@ -206,7 +206,7 @@ public class LogicController {
 
 	// Mappings for Generating Random Root-Words
 	// Play (works for both one and two player versions).
-	@RequestMapping("play") // This method starts immediately upon pressing Play button.
+	@RequestMapping({"play","playAgain","secondplay"}) // This method starts immediately upon pressing Play button.
 	public ModelAndView play(HttpSession session, Model model) {
 		List<Rootword> rootwordList = new ArrayList<>();
 		rootwordList = rP.findAll();
@@ -218,31 +218,6 @@ public class LogicController {
 		return mv;
 	}
 
-	// Play again.
-	@RequestMapping("playAgain")
-	public ModelAndView playAgain(HttpSession session, Model model) {
-		List<Rootword> rootwordList = new ArrayList<>();
-		rootwordList = rP.findAll();
-		long listLength = rootwordList.size();
-		int randomIndex = (int) (Math.random() * listLength);
-		Rootword rootword = rootwordList.get(randomIndex);
-		ModelAndView mv = new ModelAndView("gameboard", "rootword", rootword);
-		model.addAttribute("rootword", rootword);
-		return mv;
-	}
-
-	// One Player Version: Play (if player is new).
-	@RequestMapping("secondplay")
-	public ModelAndView secondPlay(HttpSession session, Model model) {
-		List<Rootword> rootwordList = new ArrayList<>();
-		rootwordList = rP.findAll();
-		long listLength = rootwordList.size();
-		int randomIndex = (int) (Math.random() * listLength);
-		Rootword rootword = rootwordList.get(randomIndex);
-		ModelAndView mv = new ModelAndView("gameboard", "rootword", rootword);
-		model.addAttribute("rootword", rootword);
-		return mv;
-	}
 
 	@RequestMapping("next")
 	@ModelAttribute("rootword")
