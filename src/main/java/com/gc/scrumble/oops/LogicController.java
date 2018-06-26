@@ -228,7 +228,7 @@ public class LogicController {
 	
 	@RequestMapping("/logout1")
 	public ModelAndView onePlayerLogout(HttpServletRequest request, HttpServletResponse reponse) {
-		ModelAndView mv = new ModelAndView("/");
+		ModelAndView mv = new ModelAndView("/oneplayerlogin");
 		request.getSession().invalidate();
 		return mv;
 	}
