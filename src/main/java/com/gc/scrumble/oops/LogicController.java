@@ -36,7 +36,7 @@ public class LogicController {
 	ScoreRepo sP;
 
 	// One Player Version Mappings
-	@RequestMapping("/oneplayerlogin")
+	@RequestMapping("/")
 	public String onePlayerLogin() {
 		return "oneplayerlogin";
 	}
