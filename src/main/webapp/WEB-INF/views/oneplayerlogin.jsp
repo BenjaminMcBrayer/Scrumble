@@ -3,10 +3,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SCRUMBLE</title>
 </head>
+<style>
+body{
+    height: 850px;
+background:#ace0ff;
+background: linear-gradient(to bottom right,#8080ff,#4db8ff,#ace0ff);
+font-family: 'Montserrat';font-size: 22px;}
+.button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button1 {font-size: 12px;}
+.button1 {border-radius: 10px;} 
+</style>
 <body>
 	${oneplayerlogin}
 	<h1>Are you ready?</h1>
@@ -28,7 +50,7 @@
 				<input type="text" name="username1" id="newusername1" required></input>
 				<label for="pword">Password:</label>
 				<input type="password" name="pword1" id="newpword1" required>
-				<button type="submit">Register</button>
+				<button class="button button1" type="submit">Register</button>
 			</fieldset>
 		</div>
 	</form>
@@ -42,7 +64,7 @@
 				<input type="text" name="username1" id="username1" required></input>
 				<label for="pword">Password:</label> 
 				<input type="password" name="pword1" id="pword1" required></input> 
-				<input type="submit" value="Login"></input>
+				<input class="button button1" type="submit" value="Login"></input>
 			</fieldset>
 		</div>
 	</form>

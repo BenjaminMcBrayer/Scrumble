@@ -3,53 +3,68 @@
     <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>It's Scrumble Time!</title>
-</head>
 <style>
+body{
+    height: 850px;
+background:#ace0ff;
+background: linear-gradient(to bottom right,#8080ff,#4db8ff,#ace0ff);
+font-family: 'Montserrat';font-size: 22px;}
 h1 {text-align: center;}
 h2 {text-align: center;}
 h3{text-align: center;}
 h4{text-align: right;}
 p {text-decoration: underline overline;text-align: right;}
 div{text-align: center;}
+.button {
+    background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button1 {font-size: 12px;}
+.button2 {font-size: 12px;}
+.button1 {border-radius: 8px;}
+.button2 {border-radius: 8px;}
 </style>
-<body style="background-color:#ACE0FF">
-<div id="numPlayers" data-prodnumber="${numPlayers}"/>
-${numPlayers}
+</head>
+<body>
+<div id="numPlayers" data-prodnumber="${numPlayers}"></div>
 	<h1>Lets Get Ready To Scrumble!!!</h1>
 	<p>Time left: <span id="count">30</span> seconds...</p>
 	<h1>${rootword.wordname }</h1>
-	<br>
-
 	<h2>Words entered:</h2>
 	<br>
 	<div id="display"></div>
 	<br>
-	<div  style="background-color: DodgerBlue;" background-size: 65px 100px; id="score"></div>
-	<br>
+	<center><div style="background-color: DodgerBlue; width: 45%;" id="score"></div></center>
 	<h3>
-	
 	<form action="result" method="post" onsubmit="crazy();"></form>
 	<form onsubmit="insert(); event.preventDefault();">
 		<input id="entry" type="text" placeholder="Word" autofocus/>	 
 	</form>
 	</h3>
-	<form action="next" method="post" id="next" >
+	<center><form action="next" method="post" id="next" >
 	<input type="submit" value="Next Player">
 	</form>
 	<form action="logout2" method="post" id="logout2" >
-	<input type="submit" value="Logout">
-	</form>
+	<input class="button button1" type="submit" value="Logout">
 	</form>
 	<form action="logout1" method="post" id="logout1" >
-	<input type="submit" value="Logout">
-	</form>
+	<input class="button button1" type="submit" value="Logout">
 	</form>
 	<form action="playAgain" method="post" id="playAgain" >
-	<input type="submit" value="Re-Scrumble">
-	</form>
+	<input class="button button1" type="submit" value="Re-Scrumble">
+	</form></center>
 
 </body>
 <script type="text/javascript">
