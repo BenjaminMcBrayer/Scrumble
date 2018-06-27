@@ -39,13 +39,11 @@ div{text-align: center;}
 </head>
 <body>
 <div id="numPlayers" data-prodnumber="${numPlayers}"></div>
-	<h1>Lets Get Ready To Scrumble!!!</h1>
+	<h1>Let's Get Ready To Scrumble!!!</h1>
 	<p>Time left: <span id="count">30</span> seconds...</p>
 	<h1>${rootword.wordname }</h1>
 	<h2>Words entered:</h2>
-	<br>
 	<div id="display"></div>
-	<br>
 	<center><div style="background-color: DodgerBlue; width: 45%;" id="score"></div></center>
 	<h3>
 	<form action="result" method="post" onsubmit="crazy();"></form>
@@ -54,7 +52,7 @@ div{text-align: center;}
 	</form>
 	</h3>
 	<center><form action="next" method="post" id="next" >
-	<input type="submit" value="Next Player">
+	<input class="button button1" type="submit" value="Next Player">
 	</form>
 	<form action="logout2" method="post" id="logout2" >
 	<input class="button button1" type="submit" value="Logout">

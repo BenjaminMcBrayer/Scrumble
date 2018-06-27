@@ -22,7 +22,7 @@
 				</c:forEach>
 	</h3>
 	<h2>Congratulations! You have Scrumbled!</h2>
-	<h3>Your score is: ${score }</h3>
+	<h3>${score }</h3>
 
 	<h3>Your max score is: ${maxscore }</h3>
 
