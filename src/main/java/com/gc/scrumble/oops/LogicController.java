@@ -93,7 +93,6 @@ public class LogicController {
 	public ModelAndView numPlay(@RequestParam("numPlayers") String numPlayers, HttpSession session, Model model) {
 		ModelAndView mv = new ModelAndView("twoplayerlogin1");
 		model.addAttribute("numPlayers", numPlayers);
-		System.out.println(numPlayers);
 		return mv;
 	}
 
@@ -104,7 +103,6 @@ public class LogicController {
 			@RequestParam("username1") String username1, @RequestParam("newpword1") String pword, HttpSession session,
 			Model model) {
 		model.addAttribute("numPlayers", numPlayers);
-		System.out.println(numPlayers);
 		User newuser = new User(username1, pword);
 		Optional<User> user = uP.findByUsername(username1);
 		if (user.isPresent()) {
@@ -135,7 +133,6 @@ public class LogicController {
 			@RequestParam("username1") String username1, @RequestParam("pword1") String pword, HttpSession session,
 			Model model) {
 		model.addAttribute("numPlayers", numPlayers);
-		System.out.println(numPlayers);
 		Optional<User> user = uP.findByUsername(username1);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
 			if (numPlayers.equals("1")) {
@@ -163,7 +160,6 @@ public class LogicController {
 			Model model) {
 		model.addAttribute("numPlayers", numPlayers);
 		model.addAttribute("username1", username1);
-		System.out.println(numPlayers);
 		User newuser = new User(username2, pword);
 		Optional<User> user = uP.findByUsername(username2);
 		if (user.isPresent()) {
