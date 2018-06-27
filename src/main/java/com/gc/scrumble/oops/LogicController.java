@@ -62,7 +62,7 @@ public class LogicController {
 			uP.save(newuser);
 			model.addAttribute("username1", username);
 			String message = "Thank you, " + username + ". Welcome to Scrumble!";
-			return new ModelAndView("readandplay", "thankyou1", message);
+			return new ModelAndView("readandplay", "welcome1", message);
 		}
 	}
 

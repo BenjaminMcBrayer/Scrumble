@@ -8,7 +8,7 @@
 <title>SCRUMBLE</title>
 </head>
 <body>
-${welcome1}${welcome2}${secondwelcome2}${thankyou1}
+${welcome1}${welcome2}${secondwelcome1}${secondwelcome2}
 <h2>How to play:</h2>
 	<h4>You will be given a base word.  </h4>
 	<h4>Look at the letters in the word and type as many words as you can using only the letters in the base word.</h4>
