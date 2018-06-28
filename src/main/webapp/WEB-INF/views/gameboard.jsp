@@ -89,7 +89,7 @@ var numPlayers = ${numPlayers};
 		document.getElementById("logout2").style.visibility = "hidden";
 	}
 	setTimeout(crazy, 30000);
-	setTimeout(next,30000);
+	setTimeout(next,36000);
 	setTimeout(entry1,30000);
 	function crazy() {
 		var xhttp = new XMLHttpRequest();

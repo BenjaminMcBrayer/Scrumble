@@ -87,7 +87,7 @@ div {
 	<h3>
 		<form action="result" method="post" onsubmit="crazy();"></form>
 		<form onsubmit="insert(); event.preventDefault();">
-			<input id="entry" type="text" placeholder="Word" />
+			<input id="entry" type="text" placeholder="Word" autofocus/>
 		</form>
 	</h3>
 	<form id="rematch" action="playAgain">
@@ -126,7 +126,7 @@ div {
 		document.getElementById("playAgain").style.visibility = "hidden";
 	}
 	setTimeout(crazy, 30000);
-	setTimeout(next, 30000);
+	setTimeout(next, 36000);
 	setTimeout(hideEntry, 30000);
 	function hideEntry() {
 		document.getElementById("entry").style.visibility = "hidden";
