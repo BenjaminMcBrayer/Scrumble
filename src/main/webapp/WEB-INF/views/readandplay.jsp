@@ -31,12 +31,12 @@ font-family: 'Montserrat';font-size: 22px;}
 </style>
 <body>
 ${welcome1}${welcome2}${secondwelcome1}${secondwelcome2}
-<h2>How to play:</h2>
+<center><h2>How to play:</h2>
 	<h4>You will be given a base word.  </h4>
 	<h4>Look at the letters in the word and type as many words as you can using only the letters in the base word.</h4>
 	<h4>You will have 30 seconds.</h4>
 	<form action="play">
-		<button class="button button1" id="play" name="play">Play</button>
+		<button class="button button1" id="play" name="play">Play</button></center>
 	</form>
 </body>
 </html>
