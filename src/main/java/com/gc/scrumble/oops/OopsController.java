@@ -31,7 +31,7 @@ import com.gc.scrumble.oops.repo.ScoreRepo;
 import com.gc.scrumble.oops.repo.UsersRepository;
 
 @Controller
-@SessionAttributes({ "rootword", "username1" ,"username2" })
+@SessionAttributes({ "rootword", "username1", "username2", "score1", "score2" })
 public class OopsController {
 
 	@Value("${oops.apikey}")
@@ -54,7 +54,7 @@ public class OopsController {
 			@ModelAttribute("rootword") Rootword gameWord, @ModelAttribute("username1") String player, Model model) {
 		List<String> duplicates = new ArrayList<String>();
 		List<String> invalids = new ArrayList<String>();
-			
+
 		// remove empty strings, in case user hits enter twice
 		List<String> temparray = new ArrayList<String>();
 		for (int m = 0; m <= wordarray.length - 1; m++) {
@@ -77,10 +77,10 @@ public class OopsController {
 		String[] wordlist = new String[wordset.size()];
 		wordlist = wordset.toArray(wordlist);
 
-		long score = 0;
+		long scoreval1 = 0;
 		boolean validEntry = true;
 		model.addAttribute("rootword", gameWord);
-		
+
 		// Create new rootword object so we can use get wordname function
 		Rootword workroot = new Rootword();
 		workroot = gameWord;
@@ -135,7 +135,7 @@ public class OopsController {
 					// if (owl.owlbotValidWord(wordlist[i])) {
 					// Backup API call ends here
 
-					score++;
+					scoreval1++;
 				} else {
 					invalids.add(wordlist[i]);
 				}
@@ -146,25 +146,28 @@ public class OopsController {
 		long userid = user.get().getUserid();
 
 		Long gameWordId = workroot.getWordid();
-		Score gameScore = new Score(score, userid, gameWordId);
+		Score gameScore = new Score(scoreval1, userid, gameWordId);
 		sR.save(gameScore);
 
+		model.addAttribute("score1", scoreval1);
 		model.addAttribute("maxscore", sR.getMaxscore(userid));
 		model.addAttribute("maxwordscore", sR.getMaxwordscore(userid, gameWordId));
 		model.addAttribute("avgwordscore", sR.getAvgwordscore(gameWordId));
 		model.addAttribute("duplicates", duplicates);
 		model.addAttribute("invalids", invalids);
 
-		return new ModelAndView("result", "score", score);
+		return new ModelAndView("result", "score", scoreval1);
 
 	}
+
 	@PostMapping("/index2")
 	@ResponseBody
 	public ModelAndView checkEntries2(@RequestParam(name = "entry", required = false) String[] wordarray,
-			@ModelAttribute("rootword") Rootword gameWord, @ModelAttribute("username2") String player, Model model) {
+			@ModelAttribute("rootword") Rootword gameWord, @ModelAttribute("username2") String player,
+			@ModelAttribute("score1") long scoreval1, Model model) {
 		List<String> duplicates = new ArrayList<String>();
 		List<String> invalids = new ArrayList<String>();
-			
+
 		// remove empty strings, in case user hits enter twice
 		List<String> temparray = new ArrayList<String>();
 		for (int m = 0; m <= wordarray.length - 1; m++) {
@@ -187,10 +190,10 @@ public class OopsController {
 		String[] wordlist = new String[wordset.size()];
 		wordlist = wordset.toArray(wordlist);
 
-		long score = 0;
+		long scoreval2 = 0;
 		boolean validEntry = true;
 		model.addAttribute("rootword", gameWord);
-		
+
 		// Create new rootword object so we can use get wordname function
 		Rootword workroot = new Rootword();
 		workroot = gameWord;
@@ -245,7 +248,7 @@ public class OopsController {
 					// if (owl.owlbotValidWord(wordlist[i])) {
 					// Backup API call ends here
 
-					score++;
+					scoreval2++;
 				} else {
 					invalids.add(wordlist[i]);
 				}
@@ -256,16 +259,18 @@ public class OopsController {
 		long userid = user.get().getUserid();
 
 		Long gameWordId = workroot.getWordid();
-		Score gameScore = new Score(score, userid, gameWordId);
+		Score gameScore = new Score(scoreval2, userid, gameWordId);
 		sR.save(gameScore);
 
+		model.addAttribute("score1", scoreval1);
+		model.addAttribute("score2", scoreval2);
 		model.addAttribute("maxscore", sR.getMaxscore(userid));
 		model.addAttribute("maxwordscore", sR.getMaxwordscore(userid, gameWordId));
 		model.addAttribute("avgwordscore", sR.getAvgwordscore(gameWordId));
 		model.addAttribute("duplicates", duplicates);
 		model.addAttribute("invalids", invalids);
 
-		return new ModelAndView("result2", "score", score);
+		return new ModelAndView("result2", "score", scoreval2);
 
 	}
 

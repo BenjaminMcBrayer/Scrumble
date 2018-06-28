@@ -26,5 +26,9 @@
 	<h3>Your max score is: ${maxscore }</h3>
 	<h3>Your max score for this word is: ${maxwordscore }</h3>
 	<h3>The average score for this word is: ${avgwordscore }</h3>
+	
+	<form action="winloseordraw">
+		<button class="button button1" type="submit">Show the Winner</button>
+	</form>
 </body>
 </html>

@@ -243,19 +243,20 @@ public class LogicController {
 	@RequestMapping("/winloseordraw")
 	public ModelAndView winLoseOrDraw(@ModelAttribute("username1") String username1,
 			@ModelAttribute("username2") String username2, @ModelAttribute("score1") Long scoreval1,
-			@ModelAttribute("score2") Long scoreval2) {
-		
+			@ModelAttribute("score2") Long scoreval2, Model model) {
+		model.addAttribute("score1", scoreval1);
+		model.addAttribute("score2", scoreval2);
 		if (scoreval1 > scoreval2) {
 			String message = username1 + " WINS!";
-			return new ModelAndView("result2", "winner", message);
+			return new ModelAndView("theend", "winner", message);
 		}
 		if (scoreval1 < scoreval2) {
 			String message = username2 + " WINS!";
-			return new ModelAndView("result2", "winner", message);
+			return new ModelAndView("theend", "winner", message);
 		}
 		if (scoreval1 == scoreval2) {
 			String message = "It's a DRAW!";
-			return new ModelAndView("result2", "winner", message);
+			return new ModelAndView("theend", "winner", message);
 		}
 		return new ModelAndView();
 	}
