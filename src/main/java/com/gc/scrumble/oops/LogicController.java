@@ -25,7 +25,7 @@ import com.gc.scrumble.oops.repo.UsersRepository;
 
 @Controller
 @SessionAttributes({ "numPlayers", "newusername1", "newusername2", "user1", "user2", "username1", "username2",
-		"rootword", "score" })
+		"rootword", "score1", "score2" })
 public class LogicController {
 
 	@Autowired
@@ -67,8 +67,9 @@ public class LogicController {
 	}
 
 	@RequestMapping("login1")
-	public ModelAndView loginExistingUser(@RequestParam("username1") String username, @RequestParam("pword1") String pword,
-			@ModelAttribute("numPlayers") String numPlayers, HttpSession session, Model model) {
+	public ModelAndView loginExistingUser(@RequestParam("username1") String username,
+			@RequestParam("pword1") String pword, @ModelAttribute("numPlayers") String numPlayers, HttpSession session,
+			Model model) {
 		numPlayers = "1";
 		model.addAttribute("numPlayers", numPlayers);
 		Optional<User> user = uP.findByUsername(username);
@@ -136,7 +137,8 @@ public class LogicController {
 		Optional<User> user = uP.findByUsername(username1);
 		if (user.isPresent() && user.get().getPword().equals(pword)) {
 			if (numPlayers.equals("1")) {
-				ModelAndView mv1 = new ModelAndView("readandplay", "welcome1", "Welcome to Scrumble, " + username1 + "!");
+				ModelAndView mv1 = new ModelAndView("readandplay", "welcome1",
+						"Welcome to Scrumble, " + username1 + "!");
 				model.addAttribute("username1", username1);
 				return mv1;
 			}
@@ -146,7 +148,7 @@ public class LogicController {
 				model.addAttribute("username1", username1);
 				return mv2;
 			}
-		} 
+		}
 		return new ModelAndView("twoplayerlogin1", "failure1",
 				"User name and password do not match. Please check your credentials, fellow Scrumbler.");
 	}
@@ -155,9 +157,8 @@ public class LogicController {
 	@RequestMapping("twoplayeradd2")
 	@ModelAttribute("numPlayers")
 	public ModelAndView addPlayerTwo(@ModelAttribute("numPlayers") String numPlayers,
-			@ModelAttribute("username1") String username1,
-			@RequestParam("username2") String username2, @RequestParam("newpword2") String pword, HttpSession session,
-			Model model) {
+			@ModelAttribute("username1") String username1, @RequestParam("username2") String username2,
+			@RequestParam("newpword2") String pword, HttpSession session, Model model) {
 		model.addAttribute("numPlayers", numPlayers);
 		model.addAttribute("username1", username1);
 		User newuser = new User(username2, pword);
@@ -198,7 +199,7 @@ public class LogicController {
 
 	// Mappings for Generating Random Root-Words
 	// Play (works for both one and two player versions).
-	@RequestMapping({"play","playAgain","secondplay"}) // This method starts immediately upon pressing Play button.
+	@RequestMapping({ "play", "playAgain", "secondplay" }) // This method starts immediately upon pressing Play button.
 	public ModelAndView play(HttpSession session, Model model) {
 		List<Rootword> rootwordList = new ArrayList<>();
 		rootwordList = rP.findAll();
@@ -210,6 +211,7 @@ public class LogicController {
 		return mv;
 	}
 
+	// Repeat root-word for second player.
 	@RequestMapping("next")
 	@ModelAttribute("rootword")
 	public ModelAndView playerTwoPlay(@ModelAttribute("rootword") Rootword rootword,
@@ -221,18 +223,40 @@ public class LogicController {
 		model.addAttribute("username2", username);
 		return mv;
 	}
-	
+
+	// Logout (one-player version)
 	@RequestMapping("/logout1")
 	public ModelAndView onePlayerLogout(HttpServletRequest request, HttpServletResponse reponse) {
 		ModelAndView mv = new ModelAndView("/oneplayerlogin");
 		request.getSession().invalidate();
 		return mv;
 	}
-	
+
+	// Logout (two-player version)
 	@RequestMapping("/logout2")
 	public ModelAndView twoPlayerLogout(HttpServletRequest request, HttpServletResponse reponse) {
 		ModelAndView mv = new ModelAndView("/twoplayerlogin");
 		request.getSession().invalidate();
 		return mv;
+	}
+
+	@RequestMapping("/winloseordraw")
+	public ModelAndView winLoseOrDraw(@ModelAttribute("username1") String username1,
+			@ModelAttribute("username2") String username2, @ModelAttribute("score1") Long scoreval1,
+			@ModelAttribute("score2") Long scoreval2) {
+		
+		if (scoreval1 > scoreval2) {
+			String message = username1 + " WINS!";
+			return new ModelAndView("result2", "winner", message);
+		}
+		if (scoreval1 < scoreval2) {
+			String message = username2 + " WINS!";
+			return new ModelAndView("result2", "winner", message);
+		}
+		if (scoreval1 == scoreval2) {
+			String message = "It's a DRAW!";
+			return new ModelAndView("result2", "winner", message);
+		}
+		return new ModelAndView();
 	}
 }
