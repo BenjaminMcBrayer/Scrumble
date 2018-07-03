@@ -13,6 +13,10 @@ import com.gc.scrumble.oops.entity.User;
 import com.gc.scrumble.oops.repo.RootwordsRepository;
 import com.gc.scrumble.oops.repo.UsersRepository;
 
+/**
+ * @author Ben McBrayer, Brent Coppinger, Victoria Rush
+ *
+ */
 
 @Controller
 public class AdminController {

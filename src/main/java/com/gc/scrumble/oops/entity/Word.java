@@ -2,7 +2,10 @@ package com.gc.scrumble.oops.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * @author Ben McBrayer, Brent Coppinger, Victoria Rush
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Word {
 	

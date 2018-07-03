@@ -7,7 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-
+/**
+ * @author Ben McBrayer, Brent Coppinger, Victoria Rush
+ *
+ */
 @Entity
 @Table(name = "scores")
 public class Score {

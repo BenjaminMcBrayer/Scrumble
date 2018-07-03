@@ -6,7 +6,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.gc.scrumble.oops.entity.Score;
-
+/**
+ * @author Ben McBrayer, Brent Coppinger, Victoria Rush
+ *
+ */
 @Repository
 public interface ScoreRepo extends JpaRepository<Score, Long> {
 	

@@ -12,7 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+/**
+ * @author Ben McBrayer, Brent Coppinger, Victoria Rush
+ *
+ */
 @Entity
 @Table(name = "rootwords")
 public class Rootword {

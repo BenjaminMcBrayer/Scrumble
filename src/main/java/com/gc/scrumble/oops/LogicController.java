@@ -23,6 +23,10 @@ import com.gc.scrumble.oops.repo.RootwordsRepository;
 import com.gc.scrumble.oops.repo.ScoreRepo;
 import com.gc.scrumble.oops.repo.UsersRepository;
 
+/**
+ * @author Ben McBrayer, Brent Coppinger, Victoria Rush
+ *
+ */
 @Controller
 @SessionAttributes({ "numPlayers", "newusername1", "newusername2", "user1", "user2", "username1", "username2",
 		"rootword", "score1", "score2" })
